@@ -1,0 +1,45 @@
+<body ondragstart="return false;" ondrop="return false;">
+  <div id="screen">
+    <img id='bandeauh' src='assets/img/bandeau_haut.png' (click)="quittermenu()" class="" alt="" [hidden]="">
+    <div id="workspace" class="spacemodal">
+      <!--<img id="logopbid" src="assets/img/logo.png" class="logopbidbig epure" alt="">-->
+      <img id='filetape1' src="assets/img/timeline-etape-1.png?v=1.001" class="fileelem vcm" alt="">
+      <div class="contain">
+        @if (loadingstate) {
+          <div class="loadscreen">
+            <mat-spinner></mat-spinner>
+          </div>
+        }
+        <div class="modal-content-mainmenu modal-content-cb">
+          <form [formGroup]="identificationFormGroup" (ngSubmit)="onSubmitIdentification()" novalidate>
+            <div class="modal-header modal-header-mainmenu modal-header-cb scaleddown">
+              <!--<img id='logopbid' class='logopbidbig' src='assets/img/LOGO_PRATIC_BOUTIC_BLANC.png' alt="">-->
+              <mat-label class="txt-noboutic">IDENTIFICATION</mat-label>
+            </div>
+            <div class="modal-body modal-body-mainmenu modal-body-cb">
+              <mat-form-field class="enlarged example-full-width scaleddown">
+                <mat-label>Code : </mat-label>
+                <input matInput formControlName="code" id="code" name="code" type="text" placeholder="Code" formControlName="code"
+                  title="6 chiffres" />
+                @if (identificationFormGroup.hasError('pattern') && !identificationFormGroup.hasError('required')) {
+                  <mat-error class="error ion-padding">
+                    Le code envoyé sur votre courriel est requis
+                  </mat-error>
+                }
+              </mat-form-field>
+              <button [disabled]="codeSended" #btnSendCode mat-fab extended (click)="sendCode(btnSendCode)" color="primary" class="btn btn-renvoyer btn-block enlarged scaleddown">RENVOYER LE CODE</button>
+            </div>
+            <br>
+              <div class="modal-footer-mainmenu">
+                <button [disabled]="isSubmitted" mat-fab extended color="primary" class="btn btn-primary btn-block btn-valider enlarged scaleddown" type="submit">
+                  VALIDER
+                </button>
+              </div>
+            </form>
+          </div>
+          <img id='illus2' src='assets/img/illustration_1.png' class='elemcb epure' alt="">
+        </div>
+      </div>
+      <img id='bandeaub' src='assets/img/bandeau_bas.png' (click)="quittermenu()" class="epure" alt="" [hidden]="">
+    </div>
+  </body>

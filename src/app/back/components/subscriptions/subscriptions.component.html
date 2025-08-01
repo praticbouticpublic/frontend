@@ -1,0 +1,91 @@
+<div id="screen">
+  <img id='bandeauh' src='assets/img/bandeau_haut.png' (click)="quittermenu()" alt="" [hidden]="">
+  @if (loadingstate) {
+    <div class="center">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+  @if (!loadingstate) {
+    <div id="workspace">
+      <button mat-fab class="fabmargin fcb" color="primary" aria-label="Revenir à l'écran d'accueil" (click)="gotoLoginPage()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="fcb">
+        <div id="spaceid">
+          <div class="vscroll">
+            <br>
+              <p class="titleac">Votre compte</p>
+              <h3>Abonnements</h3>
+              <div id="bouticlinks">
+                <!-- Account list is placed here -->
+                @for (subscription of subscriptions; track subscription) {
+                  <div>
+                    @if (subscription.status.startsWith('incomplete') === false) {
+                      <mat-list>
+                        <mat-divider></mat-divider>
+                        <br>
+                          <h4>
+                            Référence: ABOPB{{ subscription.aboref }}
+                          </h4>
+                          @if (subscription.usagetype === 'licensed') {
+                            <mat-label>
+                              Tarif : {{((subscription.decimalprice) / 100).toFixed(2)}} {{subscription.currency}} {{subscription.interval}}
+                            </mat-label>
+                          }
+                          @if (subscription.usagetype === 'recurring') {
+                            <mat-label>
+                              Tarif : {{((subscription.decimalprice) / 100).toFixed(2)}} {{subscription.currency}} {{subscription.interval}}
+                            </mat-label>
+                          }
+                          @if (subscription.usagetype === 'metered') {
+                            <mat-label>
+                              Tarif : {{subscription.decimalprice}} % de commission
+                            </mat-label>
+                          }
+                          <br>
+                            @if (subscription.status === 'active') {
+                              <mat-label>
+                                Etat : Actif
+                              </mat-label>
+                            }
+                            @if (subscription.status === 'canceled') {
+                              <mat-label>
+                                Etat : Annulé
+                              </mat-label>
+                            }
+                            @if ((subscription.status !== 'active') && (subscription.status !== 'canceled')) {
+                              <mat-label>
+                                Etat : {{subscription.status}}
+                              </mat-label>
+                            }
+                            <br>
+                              <br>
+                                @if (subscription.status === 'active' && subscription.undercancel === false) {
+                                  <button mat-fab extended color="primary" (click)="onCancel(subscription)" aria-label="Annulation">
+                                    <mat-icon>cancel</mat-icon>
+                                    Annulation
+                                  </button>
+                                  }<br>
+                                  <br>
+                                  </mat-list>
+                                }
+                              </div>
+                            }
+                          </div>
+                        </div>
+                      </div>
+                      <nav>
+                        <a class="mr-auto mdfaddlink forgotpwd" (click)="suppression()">Cloturer le compte ?</a>
+                      </nav>
+                    </div>
+                    <br>
+                      <div class="fabmargin fcb">
+                        <button mat-fab color="primary" aria-label="Ajouter un abonnement" (click)="goToAddSubcription()">
+                          <mat-icon>add</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  }
+                  <img id='bandeaub' src='assets/img/bandeau_bas.png' (click)="quittermenu()" class="epure" alt="" [hidden]="">
+                </div>
+
