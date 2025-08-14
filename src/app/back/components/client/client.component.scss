@@ -1,0 +1,77 @@
+.imgclose
+{
+  z-index: 2;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.frameimg 
+{
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	position: relative;
+	height: 33.75vmin;
+	width: 60vmin;
+	border: 1px solid black;
+	background-color: #EEEEEE;
+}
+
+.imgart
+{
+	z-index: 1;
+	max-width: 60vmin;
+	max-height: 33.75vmin;
+}
+
+
+.table-container
+{
+	display: inline-block;
+}
+
+table
+{
+	margin-bottom: 30px !important;
+}
+
+table.table-hover tbody tr:hover {
+    background-color: #e2007a !important;
+    color: white !important;
+    cursor: pointer;
+}
+
+table thead th {
+	border-top: 0px !important;
+	border-bottom: 0px !important;
+}
+
+table tbody td {
+	border-top: 1px solid black !important;
+}
+
+.mat-mdc-form-field
+{
+  display: flex !important;
+  margin-bottom: 22px;
+}
+
+.mat-mdc-checkbox
+{
+  display: flex !important;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.mat-mdc-fab
+{
+  color: white;
+}
+

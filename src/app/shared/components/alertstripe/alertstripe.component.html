@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Information</h1>
+<div mat-dialog-content>
+  <p>Le paiement par carte bancaire n&rsquo;est pas actif ! <br>
+     Vous ne pourrez pas recevoir de paiement par Carte bancaire <br>
+     Pour l&rsquo;activer rendez-vous ultérieurement dans la rubrique <b>&quot;Mon Argent&quot;</b><br>
+     ou cliquez sur le bouton <b>&quot;Go to Stripe&quot;</b> ci-dessous</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClick();dialogRef.close('no')">Fermer</button>
+  <button mat-button color="primary" (click)="onClick();dialogRef.close('yes')">Go to Stripe</button>
+</div>
+

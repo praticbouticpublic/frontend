@@ -1,0 +1,40 @@
+@if (!tableloaded) {
+  <div class="center">
+    <mat-spinner></mat-spinner>
+  </div>
+}
+@if (colorready) {
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8  demo-table" [hidden]="!tableloaded">
+    @for (column of displayedColumns; track column; let index = $index) {
+      <ng-container [matColumnDef]="column">
+        @if (columns[index].typ === 'pk') {
+          <th mat-header-cell *matHeaderCellDef style="display:none"> {{ column }} </th>
+          <td mat-cell *matCellDef="let element" style="display:none"> {{ element[column] }} </td>
+        }
+        @if (((columns[index].typ !== 'bool') && (columns[index].typ !== 'pk')  && (columns[index].typ !== 'prix'))) {
+          <th mat-header-cell *matHeaderCellDef> {{ column }} </th>
+          <td mat-cell *matCellDef="let element" [routerLink]="[routerPath, actionselect, table, element[displayedColumns[0]], ((selcol === '') ? 'none' : selcol), selid]"> {{ element[column] }} </td>
+        }
+        @if (columns[index].typ === 'bool') {
+          <th mat-header-cell *matHeaderCellDef> {{ column }} </th>
+          <td mat-cell *matCellDef="let element" [routerLink]="linkEnabled ? [routerPath, actionselect, table, element[displayedColumns[0]], ((selcol === '') ? 'none' : selcol), selid] : undefined" (click)="toggleRouting()"><mat-checkbox [checked]="element[column] === '1'" (change)="writeFlagToBd($event, element[displayedColumns[0]], columns[index])"></mat-checkbox></td>
+        }
+        @if (columns[index].typ === 'prix') {
+          <th mat-header-cell *matHeaderCellDef> {{ column }} </th>
+          <td mat-cell *matCellDef="let element" [routerLink]="[routerPath, actionselect, table, element[displayedColumns[0]], ((selcol === '') ? 'none' : selcol), selid]"> {{ convertToMoney(element[column]) }} </td>
+        }
+      </ng-container>
+    }
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr class="matrow" mat-row [class.demo-row-is-clicked]="clickedRows.has(row)" *matRowDef="let row; columns: displayedColumns; let k = index" [style.background-color]="(table == 'commande') ? couleur[k] : 'white'" [ngClass]="(table === 'commande') ? ((luminosite(couleur[k])>127) ? 'textblack' : 'textwhite') : 'textblack'"></tr>
+  </table>
+  }<br><br>
+  @if (table !== 'commande' && table !== 'lignecmd') {
+    <button mat-fab color="primary" aria-label="Ajouter un élément" style="float: right;" [routerLink]="[routerPath, 'insertrecord', table, ((selcol === '') ? 'none' : selcol), selid]">
+      <mat-icon>add</mat-icon>
+    </button>
+    }<br><br><br>
+    <mat-paginator #paginator (page)="handlePageEvent($event)" [length]="count" [pageSize]="limit" [pageSizeOptions]="nbpage" aria-label="Sélection page" />
+    <br>
+      <br>
+        <br>

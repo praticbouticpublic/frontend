@@ -1,0 +1,8 @@
+<app-presentationrecord action="update" [table]="table" />
+@if (latable && sstablenom && sstablefld && sstableid) {
+  <div>
+    @if (latable.sstable === 'o') {
+      <app-presentationtable [table]="sstablenom" [selcol]="sstablefld" [selid]="sstableid" action="view"></app-presentationtable>
+    }
+  </div>
+}
