@@ -1,0 +1,15 @@
+<div class="">
+  <p class="title">Espace Client</p>
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+      <a mat-tab-link [routerLink]="['shop']" [active]="activeLink == 1" (click)="activeLink = 1">BOUTIC</a>
+      <a mat-tab-link [routerLink]="['settings']" [active]="activeLink == 2" (click)="activeLink = 2">REGLAGES</a>
+      <a mat-tab-link [routerLink]="['backoffice']" [active]="activeLink == 3" (click)="activeLink = 3">BACK-OFFICE</a>
+      <a mat-tab-link [routerLink]="['qrcodegenerator']" [active]="activeLink == 4" (click)="activeLink = 4">GENERATEUR DE QRCODE</a>
+      <a mat-tab-link [routerLink]="['client']" [active]="activeLink == 5" (click)="activeLink = 5">CLIENT</a>
+  </nav>
+</div>
+<div class="formfield">
+  <mat-tab-nav-panel #tabPanel>
+      <router-outlet></router-outlet>
+  </mat-tab-nav-panel>
+</div>

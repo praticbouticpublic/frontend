@@ -1,0 +1,55 @@
+name: PROD frontend Praticboutic Workflow
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Connexion SSH et déploiement
+      uses: appleboy/ssh-action@v1.2.2
+      with:
+        host: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        key: ${{ secrets.FTP_SSH_KEY }}
+        port: 22
+        script: |
+          # Download and install nvm:
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+          # in lieu of restarting the shell
+          \. "$HOME/.nvm/nvm.sh"
+          # Download and install Node.js:
+          nvm install 24
+          # Verify the Node.js version:
+          node -v 
+          nvm current 
+          # Verify npm version:
+          npm -v 
+          # Nettoyage de la destination
+          rm -rf /var/www/vhosts/praticboutic.fr/praticboutic.fr/{*,.*}
+          # copie des fichiers sources
+          cd /var/www/vhosts/praticboutic.fr/praticboutic.fr/
+          git clone git@github.com:praticboutic/praticboutic-frontend.git /var/www/vhosts/praticboutic.fr/praticboutic.fr/
+          # Attribution des droits
+          cd /var/www/vhosts/praticboutic.fr/
+          chown -R qruser:psaserv praticboutic.fr/
+          chmod -R 777 praticboutic.fr/
+          # mise en place des paramètre de production
+          cd /var/www/vhosts/praticboutic.fr/praticboutic.fr/src/environments/
+          cp environment.prod.ts environment.ts
+          # Compilation des fichiers sources
+          cd /var/www/vhosts/praticboutic.fr/praticboutic.fr/
+          npm install --legacy-peer-deps
+          npm install -g @angular/cli --legacy-peer-deps
+          npm update --legacy-peer-deps
+          ng build praticboutic --configuration=production --output-path docprod --base-href / 
+          # Ajout des fichiers supplémentaire nécessaire à l'installation et au fonctionnement
+          cp ./docsprod/browser/index.html ./docsprod/browser/404.html
+          cp ./.htaccess ./docsprod/browser
+      

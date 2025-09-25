@@ -1,0 +1,50 @@
+<body ondragstart="return false;" ondrop="return false;">
+  <div id="screen">
+    <img id='bandeauh' src='assets/img/bandeau_haut.png' onclick="quitterbuildboutic()" class='epure' alt="">
+    <div id="workspace" class="spaceflex">
+      @if (loadingfixe || loadingconso) {
+        <div class="container">
+          <div class="loadscreen" >
+            <mat-spinner></mat-spinner>
+          </div>
+        </div>
+      }
+      <form [hidden]="loadingfixe || loadingconso" [formGroup]="subchoiceForm" id="subscriptionchoice-form" (ngSubmit)="onSubmitSubChoice()">
+        <div id="pagecontainerid" class="pagecontainer">
+          <img id="logopbid" src="assets/img/logo.png" class="logopbidbig depure" alt="">
+          @if (type === 'init') {
+            <img id='filetape5' src="assets/img/fil_Page_5.png?v=1.001" class="fileelem" alt="">
+          }
+          <div class="filecontainer">
+            <main id="mainid" class="fcb">
+              <div id="cfid" class="customform">
+                <p class="center middle title">
+                  Je choisis ma formule d'abonnement
+                </p>
+                <div class="formulespace center">
+                  <img id="commissionico" class="formuleico" src="{{ subscription === 1 ? 'assets/img/commission_selected.png?v=0.2' : 'assets/img/commission_unselected.png?v=0.2' }}" (click)="toggle('commission')" alt="" [hidden]="loadingconso">
+                  <img id="engagementico" class="formuleico" src="{{ subscription === 2 ? 'assets/img/engagement_selected.png?v=0.2' : 'assets/img/engagement_unselected.png?v=0.2' }}" (click)="toggle('engagement')" alt="" [hidden]="loadingfixe">
+                </div>
+                <input formControlName="abonnement" type="hidden" [value]="subscription"/>
+                <section class="param rwc centerable">
+                  <mat-checkbox formControlName="cgv" id="cgvid" name="cgv" (click)="allow()" class="grey">J'accepte <a class="greylink" (click)="gotoCGV(type)"><u>les conditions générales de vente</u></a></mat-checkbox>
+                </section>
+                <br>
+                  <div class="param">
+                    <mat-card-actions  class="matcardaction">
+                      <button [disabled]="isSubmitted" mat-fab extended color="primary" class="btn btn-primary btn-block btn-valider regsubmit" type="submit" autofocus>
+                        <mat-icon>send</mat-icon>
+                        JE VALIDE !
+                      </button>
+                      <p class="changeable">Les informations pourront être modifié par la suite à partir de votre espace</p>
+                    </mat-card-actions>
+                  </div>
+                </div>
+              </main>
+            </div>
+          </div>
+        </form>
+      </div>
+      <img id='bandeaub' src='assets/img/bandeau_bas.png' onclick="quitterbuildboutic()" class='epure' alt="">
+    </div>
+  </body>
