@@ -1,0 +1,285 @@
+.tile
+{
+  //background-image: url('../../../../assets/img/tile.jpg');
+  background-size: 40%; 
+  background-repeat: repeat;
+  //height: 100%;
+  //width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.example-form {
+  //height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.commercant {
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.example-full-width {
+  width: 75vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.flexcenter
+{
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.matacsize
+{
+  width: 33vmax;
+}
+
+h1,
+h5,
+p {
+  font-weight: 600;
+  word-break: break-all;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.greyfont , .form-select {
+  color: #595858 !important;
+}
+
+@media only screen and (min-width:1025px)
+{
+  .depure
+  {
+    display:none !important;
+  }
+
+  #workspace
+  {
+    position: absolute;
+    top: 5.467vw !important;
+    bottom: 4.096vw !important;
+    left: 0px;
+    right: 0px;
+  }
+
+  .modal-content-mainmenu
+  {
+    padding: 2vw;
+  }
+
+  .btn-nbprimary
+  {
+    flex: 0 0 40% !important;
+  }
+  
+  .btn-nbsecondary
+  {
+    flex: 0 0 40% !important;
+  }
+
+  #bandeauh
+  {
+    width: 100vw !important;
+    height: 5.467vw !important;
+  }
+}
+
+@media only screen and (max-width:1024px)
+{
+  .epure
+  {
+    display:none !important;
+  }
+
+  #screen 
+  {
+    height: auto !important;
+    width: auto !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  #workspace 
+  {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    margin-top: 8vmin;
+  }
+
+  .spacemodal 
+  {
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: column;
+    width: 95vw;
+    height: 85vmax;
+  }
+
+  .modal-content-mainmenu
+  {
+    display:flex;
+    width: 90vw !important;
+    justify-content: center;
+    align-content: center;
+    //flex-direction: column;
+    padding: 2vmin !important;
+  }
+
+  .logopbidbig
+  {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+  }
+
+  .modal-body-mainmenu
+  {
+    width: auto !important;
+  }
+
+  #bandeauh
+  {
+    width: 100vw !important;
+    height: 5.467vw !important;
+  }
+
+}
+
+@media only screen and (max-width:640px)
+{
+  #bandeauh
+  {
+    width: auto !important;
+    height: 16.67vmin !important;
+    margin-left: -100vmin;
+    margin-right: -100vmin;
+  }
+}
+
+#bandeauh
+{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: auto;
+  z-index: 1;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px #777;
+}
+
+#screen
+{
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+.spacemodal
+{
+  display: flex;
+  justify-content: space-evenly;
+  flex-flow: column;
+}
+
+#bandeaub
+{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100vw !important;
+  height: 4.096vw !important;
+  overflow: auto;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.contain
+{
+  max-width: 100vmax;
+  width: 27vmax;
+}
+
+.smalltf
+{
+  font-size: 75%;
+  font-weight: normal;
+  //font-family: 'Montserrat', sans-serif !important;
+  color:#777;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 5vh;
+}
+
+.enlarged
+{
+  width: 100%;
+}
+
+.enlargedxl
+{
+  width: 36vmax;
+}
+
+mat-form-field
+{
+  transform: scale(0.75);
+}
+
+.mdc-text-field--filled
+{
+  border-radius: 25px;
+}
+mat-form-field > div
+{
+  border-radius: 25px;
+}
+
+.smalltb
+{
+  font-size: 75%;
+  font-weight: bold;
+  //font-family: 'Montserrat', sans-serif !important;
+  color:#FFF;
+  text-align: center;
+}
+
+.res34
+{
+  transform: scale(0.75);
+}
+
+select
+{
+  font-size: 67%;
+}
+
+@media (prefers-color-scheme: light) {
+  .spacemodal {
+    background-color: white;
+  }
+  
+}
+
+@media (prefers-color-scheme: dark) {
+  .spacemodal {
+    background-color: black;
+  }
+}

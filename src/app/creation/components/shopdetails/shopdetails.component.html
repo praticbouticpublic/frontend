@@ -1,0 +1,67 @@
+<body ondragstart="return false;" ondrop="return false;">
+  <div id="screen">
+    <img id='bandeauh' src='assets/img/bandeau_haut.png' (click)="quittermenu()" class='' alt="">
+    <div id="workspace" class="spaceflex">
+      @if (loadingstate) {
+        <div class="loadscreen">
+          <mat-spinner></mat-spinner>
+        </div>
+      }
+      <div id="mainmenu" class="elemcb" [hidden]="loadingstate">
+        <!--<img id="logopbid" src="assets/img/logo.png" class="logopbidbig epure" alt="">-->
+        <img id='filetape3' src="assets/img/timeline-etape-3.png?v=1.001" class="fileelem" alt="">
+        <div class="filecontainer">
+          <div id='mainform' class="customform notobig alternate-theme">
+            <p class="center middle title">
+              Formulaire d'inscription
+            </p>
+            <form [formGroup]="shopdetailsFormGroup" (ngSubmit)="onSubmitShopdetails()" novalidate>
+              <div class="twocol">
+                <mat-form-field class="param1 scaleddown">
+                  <input matInput formControlName="nom" id="nom" maxlength="100" name="nom" type="text" placeholder="Nom de la boutic" value="" required (keyup)="createAlias($event)"><br>
+                  <mat-error>Le nom de la boutic est requis</mat-error>
+                </mat-form-field>
+                <mat-form-field class="param1 scaleddown">
+                  <input matInput formControlName="aliasboutic" id="aliasboutic" maxlength="100" name="aliasboutic" type="text" placeholder="Alias de la boutic" value="" pattern="(?!admin|common|upload|vendor)[a-z0-9]{3,}" title="Boutic Alias autorisé de trois chiffres contenant uniquement des minuscules et des chiffres" required><br>
+                  <mat-error>L'alias de la boutic est requis 3 car. min. uniquement minuscules chiffres</mat-error>
+                </mat-form-field>
+                <mat-form-field class="param1 scaleddown">
+                  <input matInput formControlName="email" id="email" maxlength="255" name="email" type="email" placeholder="Courriel de la Boutic" title="Courriel où sera envoyé les commandes" autocomplete="on" required><br>
+                  <mat-error>Un courriel valide est requis pour la boutic</mat-error>
+                </mat-form-field>
+                <div id="bloclogoid">
+                  <button mat-flat-button color="secondary" type="button" (click)="fileInput.click()" class="btn btn-fileupload enlarged">
+                    <span class="paramfieldlf">Chargement du logo</span>
+                    <input #fileInput type="file" accept="image/png, image/jpeg" (change)="uploadlogo($event)" style="display:none;" />
+                  </button>
+                  <div class="frameimg">
+                    @if (srclogo) {
+                      <img id="artlogo" class="imgart" alt="" [hidden]="!srclogo" [src]="srvroot +'upload/' + srclogo">
+                    }
+                    <img id="logofermer" class="imgclose" src="assets/img/fermer.png" [hidden]="!srclogo" alt="" (click)="srclogo='';">
+                    @if (!logoloaded) {
+                      <mat-spinner id="spinimg"></mat-spinner>
+                    }
+                  </div>
+                  <mat-checkbox class="paramlabellf custom-checkbox" id="autologo" name="autologo" type="checkbox" title="Logo automatique" autocomplete="on">Je n'ai pas de logo, création automatique de logo</mat-checkbox>
+                </div>
+                <div class="param scaleddown">
+                  <mat-card-actions>
+                    <button [disabled]="isSubmitted" mat-fab extended color="primary" class="btn btn-primary btn-block btn-valider regsubmit" type="submit" autofocus>
+                      <mat-icon>send</mat-icon>
+                      CONTINUER
+                    </button>
+                    <p class="changeable">Les informations pourront être modifié par la suite à partir de votre espace</p>
+                  </mat-card-actions>
+                </div>
+              </div>
+            </form>
+            <br>
+            </div>
+            <img id='illus1' src='assets/img/illustration_4.png' class='elemcb epure' alt="">
+          </div>
+        </div>
+      </div>
+      <img id='bandeaub' src='assets/img/bandeau_bas.png' (click)="quittermenu()" class='epure' alt="">
+    </div>
+  </body>
