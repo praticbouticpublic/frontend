@@ -1,0 +1,54 @@
+export interface Categorie 
+{
+  id: number;
+  nom: string;
+  active: boolean;
+  open: boolean;
+}
+
+export interface Article 
+{
+  id: number;
+  nom: string;
+  prix: number;
+  description: string;
+  categorie: Categorie;
+  unite: string;
+  image: string;
+  qte: number;
+  listimg : Image[];
+  groupes: Groupe[];
+  current: number;
+}
+
+export interface Image
+{
+  artid: number;
+  image: string;
+  loaded: boolean;
+}
+
+export interface Groupe
+{
+  id: number;
+  nom: string;
+  multi: boolean;
+  options: Option[];
+  selection: (Array<number> | number)[];
+}
+
+export interface Option
+{
+  id: number;
+  nom: string;
+  surcout: number;
+  selected : boolean;
+}
+
+export interface BouticInfo
+{
+  customid: number;
+  logo: string;
+  nom: string;
+}
+
