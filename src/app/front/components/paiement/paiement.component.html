@@ -1,0 +1,117 @@
+<body ondragstart="return false;" ondrop="return false;" onmousedown="return false" onselectstart="return false">
+  <div #header id="header">
+    <a href="admin/home"><img id="mainlogo" src="assets/img/logo-pratic-boutic.png"></a>
+  </div>
+  <div id="main" [style.height]="heightfortheBottom">
+    @if (logo) {
+      <img id="logo" [src]="srvroot + 'upload/' + logo" [hidden]="!logo">
+    }
+    <p id="marqueid" class="marque" [hidden]="logo">{{ nom }}</p>
+    @if (loadingState) {
+      <div class="spincenter">
+        <mat-spinner id="spinimgid"></mat-spinner>
+      </div>
+    }
+    @if (!loadingState) {
+      <div id="pan">
+        <div id="methodid">
+          @if (method === 2) {
+            <p class="pres centertitle">Consomation sur place</p>
+          }
+        </div>
+        <div id="tableid">
+          @if (method === 2) {
+            <p class="pres centertitle">Table numéro {{ table }}</p>
+          }
+        </div>
+        <div id="commandediv">
+          @if (commande) {
+            <p class="pres centertitle">Résumé de votre commande</p>
+          }
+          <table mat-table [dataSource]="commande">
+            <ng-container matColumnDef="nom">
+              <th mat-header-cell *matHeaderCellDef class="colart">Article</th>
+              <td mat-cell *matCellDef="let cmdline" class="colart">{{ cmdline.name }}</td>
+            </ng-container>
+            <ng-container matColumnDef="prix">
+              <th mat-header-cell *matHeaderCellDef class="colstd">Prix</th>
+              <td mat-cell *matCellDef="let cmdline" class="colstd">{{ cmdline.prix | number:'1.2-2' }}</td>
+            </ng-container>
+            <ng-container matColumnDef="quantite">
+              <th mat-header-cell *matHeaderCellDef class="colstd">Qté</th>
+              <td mat-cell *matCellDef="let cmdline" class="colstd">{{ cmdline.qt }}</td>
+            </ng-container>
+            <ng-container matColumnDef="total">
+              <th mat-header-cell *matHeaderCellDef class="colprx">Total</th>
+              <td mat-cell *matCellDef="let cmdline" class="colprx">{{ (cmdline.prix * cmdline.qt) | number:'1.2-2' }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+        @if (vente === 'LIVRER' && method > 2) {
+          <div class="fraistotal" id="sstotalid">
+            <p class="fleft">Sous-total : </p><p class="fright">{{ somme | number:'1.2-2' }} € </p><br>
+          </div>
+        }
+        @if (remise > 0) {
+          <div class="fraistotal" id="remiseid">
+            <p class="fleft">Remise : </p><p class="fright">{{ -remise | number:'1.2-2' }} € </p><br>
+          </div>
+        }
+        @if (vente ==='LIVRER' && method > 2) {
+          <div class="fraistotal" id="fraislivid">
+            <p class="fleft">Frais de livraison : </p><p class="fright">{{ fraislivr | number:'1.2-2' }} € </p><br>
+          </div>
+        }
+        <div class="fraistotal mbot" id="totalid">
+          @if (vente === 'LIVRER' && method > 2) {
+            <p class="fleft wbld">Total : </p><p class="fright">{{ (fraislivr + somme - remise) | number:'1.2-2' }} € </p><br>
+          }
+          @if (vente === 'EMPORTER' || method === 2) {
+            <p class="fleft wbld">Total : </p><p class="fright">{{ (somme - remise) | number:'1.2-2' }} € </p><br>
+          }
+        </div>
+        @if (paiement === 'COMPTANT' && method > 2) {
+          <div class="fpay" id="payid">
+            <p class="mntpay">MONTANT &Agrave; PAYER : {{ (fraislivr + somme - remise) | number:'1.2-2' }} € </p>
+          </div>
+        }
+        <br>
+        </div>
+      }
+    </div>
+    <div #paiementfooter id="paiementfooter" [hidden]="loadingState">
+      @if ((method  === 3) && (paiement==='COMPTANT')) {
+        @if ((mnysys === 'STRIPE MARKETPLACE')) {
+          <div>
+            @if (elementsOptions.clientSecret) {
+              <ngx-stripe-elements
+                [stripe]="stripe"
+                [elementsOptions]="elementsOptions"
+                >
+                <ngx-stripe-payment [options]="paymentElementOptions" />
+              </ngx-stripe-elements>
+              <button mat-flat-button color="primary" (click)="pay()" class="btnstripe">PAYER</button>
+            }
+          </div>
+        }
+      }
+      <div #footer id="footer" [hidden]="loadingState">
+        @if ((method  === 3) && (paiement ==='COMPTANT')) {
+          <div class="solobn">
+            <button class="navindicsolo" id="retourcarte" (click)="Retour()">Revenir sur les informations</button>
+          </div>
+        }
+        @if ((method  !== 3) || (paiement!=='COMPTANT')) {
+          <div class="grpbn">
+            <button class="navindic" id="retourcarte" (click)="Retour()">Revenir sur les informations</button>
+            <button class="navindic" id="validcarte" (click)="gotoFin()">Valider</button>
+          </div>
+        }
+      </div>
+    </div>
+    @if (getShowBarre()) {
+      <div id="barre">Ce site utilise des cookies<div id="fermer" (mousedown)="setShowBarre(true)"></div></div>
+    }
+  </body>

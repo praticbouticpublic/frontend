@@ -1,0 +1,514 @@
+*
+{
+  touch-action: manipulation;
+}
+
+@media only screen and (min-width:1025px)
+{
+  .depure
+  {
+    display:none !important;
+  }
+
+  #workspace
+  {
+    position: absolute;
+    top: 5.467vw !important;
+    bottom: 4.096vw !important;
+    left: 0px;
+    right: 0px;
+    margin-top: auto;
+  }
+
+  .modal-content-mainmenu
+  {
+    padding: 4vmin;
+  }
+
+  .btn-nbprimary
+  {
+    flex: 0 0 40% !important;
+  }
+  
+  .btn-nbsecondary
+  {
+    flex: 0 0 40% !important;
+  }
+
+  .fileelem
+  {
+    width: 45%;
+    margin: 6vmin;
+  }
+
+  .title
+  {
+    font-size: 200%;
+    font-weight: bolder;
+    font-family: 'Montserrat', sans-serif !important;
+    color: #e2007a !important;
+  }
+
+  #bandeauh
+  {
+    width: 100vw !important;
+    height: 5.467vw !important;
+  }
+
+  .vcm
+  {
+    margin-top: auto;
+  }
+}
+
+@media only screen and (max-width:1024px)
+{
+  .epure
+  {
+    display:none !important;
+  }
+
+  #screen 
+  {
+    height: auto !important;
+    width: auto !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  #workspace 
+  {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    margin-top:15vmin;
+  }
+
+  .spacemodal 
+  {
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    align-items: flex-start;
+    width: 95vw;
+    height: 95vh;
+  }
+
+  .modal-content-mainmenu
+  {
+    display:flex;
+    width: 90vw !important;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    padding: 10vmin !important;
+  }
+
+  .logopbidbig
+  {
+    margin-top: 3vw;
+    margin-bottom: 3vw;
+  }
+
+  .modal-body-mainmenu
+  {
+    width: auto !important;
+    margin-bottom: 2vh;
+  }
+
+  .elemcb
+  {
+    margin: 0 !important;
+  }
+
+  .fileelem 
+  {
+    width: 80vw !important;
+    margin: 3vmin !important;
+  }
+
+  .title
+  {
+    font-size: 200%;
+    font-weight: bolder;
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  .enlarged
+  {
+    width: 100%;
+  }
+
+  .vcm
+  {
+    margin-top: 6vmin;
+  }
+
+  #bandeauh
+  {
+    width: 100vw !important;
+    height: 5.467vw !important;
+  }
+
+
+}
+
+@media only screen and (max-width:640px)
+{
+  #workspace 
+  {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    margin-top: 20vmin;
+  }
+
+  #bandeauh
+  {
+    width: auto !important;
+    height: 16.67vmin !important;
+    margin-left: -100vmin;
+    margin-right: -100vmin;
+  }
+
+  .vcm
+  {
+    margin-top: 10vmin;
+  }
+  
+}
+
+#screen
+{
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+#bandeauh
+{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: auto;
+  z-index: 1;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px #777;
+}
+
+.spacemodal
+{
+  display: flex;
+  justify-content: center;
+  flex-flow: row;
+  align-items: flex-start;
+}
+
+/*.mdfaddlink
+{
+	color: #1D1D1B !important;
+	width: 100% !important;
+	text-align: center;
+	text-decoration: underline;
+	font-size: 75%;
+}*/
+
+.elemcb
+{
+  margin: 60px;
+  text-align: center;
+}
+
+.modal-content-mainmenu
+{
+  border-radius: 25px !important;
+  background-color: #595858 !important;
+}
+
+.modal-header-mainmenu
+{
+  height: 150px;
+}
+
+.modal-header-cb
+{
+  background-color: #595858;
+  color: white;
+  border-bottom: 0px !important;
+  margin-left: auto;
+  margin-right: auto;
+  flex-flow: column;
+  align-items: center;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+#logopbid
+{
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.logopbid
+{
+	width: 100px;
+}
+
+.logopbidbig
+{
+	width: 175px;
+}
+
+.modal-title-cb
+{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 1px solid white;
+  height: 38px;
+  line-height: 2.5 !important;
+}
+
+.modal-body-cb
+{
+  justify-content: space-evenly;
+  display: flex;
+  height: auto;
+  flex-flow: column;
+  align-items: center;
+  background-color: #595858;
+  color: white;
+  border-top: 0px !important;
+  border-bottom: 0px !important;
+}
+
+.enlarged
+{
+  width: 100%;
+}
+
+.modal-footer-mainmenu
+{
+	background-color: #595858;
+	color: white;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-evenly;
+	align-items: center;
+	height: 170px;
+}
+
+.btn-primary
+{
+	background-color: #009CDB !important;
+	border-color: #009CDB !important;
+  color: white;
+}
+
+.btn-valider
+{
+  font-weight: bold !important;
+}
+
+.btn-creationboutic
+{
+  font-weight: bold !important;
+  background-color: white !important;
+  color: #e2007a !important;
+  border: 1px solid #e2007a !important;
+}
+
+.btn-annuler
+{
+  font-weight: bold !important;
+  background-color: white !important;
+  color: #e2007a !important;
+  border: 1px solid #e2007a !important;
+}
+
+.btn
+{
+  border-radius: 1.5rem !important;
+}
+
+#illus1
+{
+  height: 50vh;
+}
+
+#bandeaub
+{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100vw !important;
+  height: 4.096vw !important;
+  overflow: auto;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.mdfaddlink
+{
+	color: #1D1D1B !important;
+	width: 100% !important;
+	text-align: center;
+	text-decoration: underline;
+	font-size: 75%;
+  cursor: pointer;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #e2007a !important;
+ }
+
+ ::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: #e2007a !important;
+} 
+
+::ng-deep.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: #e2007a !important;
+}
+
+.mdc-text-field .mdc-text-field__input {
+  caret-color: var(--mat-theme-primary, #e2007a) !important;
+}
+
+mat-form-field.mat-form-field.mat-white {
+  &.mat-focused {
+    .mat-form-field-label {
+        color: #e2007a;
+    }
+    .mat-form-field-ripple {
+        background-color: #e2007a !important;
+    }
+  }
+  .mat-form-field-label,.mat-form-field-label.mat-focused,
+  .mat-form-field.mat-focused.matform-field-should-float {
+      color: #e2007a;
+  }
+  .mat-form-field-underline, .mat-form-field-underline.mat-focused {
+      background-color: #e2007a;
+    }
+  }
+  
+  .mdc-text-field--filled .mdc-line-ripple::after {
+    border-bottom-color: var(--mdc-theme-primary, #e2007a) !important;
+}
+
+#illus2
+{
+  height: 46vh;
+}
+
+#illus3
+{
+  height: 48vh;
+  margin: 20px;
+}
+
+.twocol 
+{
+	column-count: 2;
+}
+
+.filecontainer
+{
+  display: flex;
+  align-items: center;
+}
+
+.notobig
+{
+  max-width: 33vw;
+}
+
+.elemcb
+{
+  margin: 60px;
+  text-align: center;
+}
+
+.formuleico
+{
+  height: 24vh;
+  padding: 20px;
+}
+
+#illus8
+{
+  height: 50vh;
+}
+
+.spaceflex
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+  overflow: hidden;
+}
+
+.matcardaction
+{
+  display: grid;
+}
+
+.loadscreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+#card-element-errors
+{
+  color: red;
+}
+
+.pagecontainer
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin:25px;
+}
+
+.scrolly
+{
+  overflow-y: auto;
+  align-items: flex-start !important;
+}
+
+.scaleddown
+{
+  transform: scale(0.75);
+}
+
+.montserrat
+{
+  font-family: 'Montserrat';
+  font-size: 75%;
+}
+
+.cor
+{
+  width: 133.67%;
+  margin-left: -16.67%
+}
+
