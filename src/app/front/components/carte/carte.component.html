@@ -1,0 +1,143 @@
+<body ondragstart="return false;" ondrop="return false;" onmousedown="return false" onselectstart="return false">
+  <div #header id="header" [hidden]="!loadingState">
+    <a href="admin/home"><img id="mainlogo" src="assets/img/logo-pratic-boutic.png" (load)="setheightfortheBottom()"></a>
+  </div>
+  <div id="main" [style.height]="heightfortheBottom">
+
+    @if (logo) {
+      <img id="logo" [src]="srvroot + 'upload/' + logo">
+    }
+    <p id="marqueid" class="marque" [hidden]="logo">{{ nom }}</p>
+    <p class="centertitle">Bon de commande</p>
+    <mat-spinner class="spincenter" [hidden]="loadingState" id="spinimgid"></mat-spinner>
+    <div id="mainformid" name="mainform" autocomplete="off" [hidden]="!loadingState">
+      @for (cat of categories; track cat; let a = $index) {
+        @if (cat.active && cat.id) {
+          <button [hidden]="!cat.id" class="accordion" (click)="cat.open = !cat.open" [class]="cat.open ? 'activepb' : ''">
+            {{ cat.nom }}
+          </button>
+        }
+        @if (articles.length >= categories.length) {
+          <div class="panel" [style.maxHeight]="(cat.id > 0) ? 'initial' : 'max-content'" [hidden]="!cat.open">
+            @for (art of articles[a]; track art; let b = $index) {
+              @if ((cat.active || !cat.id) && (art.categorie.id === cat.id)) {
+                <div class="arcel artcelb">
+                  @if (sizeimg === 'bigimg') {
+                    <div>
+                      <ng-container style="position:relative;display: flex;">
+                        <ngb-carousel id="carouselimgid" class="frameimg imgart" [interval]="0" [showNavigationIndicators]="false" style="position:relative;display: grid;">
+                          @for (img of art.listimg; track img; let c = $index) {
+                            <ng-template ngbSlide>
+                              <ng-container class="picsum-img-wrapper" [class]="(b === 0) ? 'active' : ''">
+                                <img [src]="srvroot + 'upload/' + img.image" class="pic bigimg" alt="" (load)="img.loaded = true;"/>
+                              </ng-container>
+                              <mat-spinner id="spinimgid" class="picsum-img-wrapper imgart" [hidden]="img.loaded"></mat-spinner>
+                            </ng-template>
+                          }
+                        </ngb-carousel>
+                        <div class="rowah">
+                          <div class="colb1">
+                            <div class="nom">{{ art.nom }}<br></div>
+                            @if (art.description.length > 0) {
+                              <div class="desc"> {{ art.description }}<br></div>
+                            }
+                          </div>
+                          <div class="colb2"></div>
+                        </div>
+                        <div class="rowah">
+                          <div class="colb1">
+                            <div class="vctrqte">
+                              <p class="qte">Quantit&eacute;s :&nbsp;&nbsp;</p>
+                              <img class="bts bmoins" [src]="!art.qte ? 'assets/img/bouton-moins-inactif.png' : 'assets/img/bouton-moins.png'" (click)="subQt(art)" />
+                              <p class="artqt"> {{ art.qte }} </p>
+                              <img class="bts bplus" src="assets/img/bouton-plus.png" (click)="addQt(art)"/>
+                            </div>
+                          </div>
+                          <div class="colb2">
+                            <p class="prix">{{ (art.prix | number : '1.2-2') + ' ' + art.unite }}<br></p>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  }
+                  @if (sizeimg === 'smallimg') {
+                    <div>
+                      <div class="rowah">
+                        <div class="cola1">
+                          <div class="nom">{{ art.nom }}<br></div>
+                          @if (art.description.length > 0) {
+                            <div class="desc">{{ art.description }}<br></div>
+                          }
+                          @if (method > 0) {
+                            <div class="vctrqte">
+                              <p class="qte">Quantit&eacute;s :&nbsp;&nbsp;</p>
+                              <img class="bts bmoins" [src]="!art.qte ? 'assets/img/bouton-moins-inactif.png' : 'assets/img/bouton-moins.png'" (click)="subQt(art)" disabled="true"/>
+                              <p class="artqt"> {{ art.qte }} </p>
+                              <img class="bts bplus" src="assets/img/bouton-plus.png" (click)="addQt(art)" disabled="false"/>
+                            </div>
+                          }
+                          <div class="prixsm">{{ (art.prix | number : '1.2-2') + ' ' + art.unite }}</div>
+                        </div>
+                        <div class="cola2">
+                          <ng-container style="position:relative;display: flex;">
+                            <ngb-carousel id="carouselimgid" class="frameimg imgart" [interval]="0" [showNavigationIndicators]="false" style="position:relative;display: grid;">
+                              @for (img of art.listimg; track img; let c = $index) {
+                                <ng-template ngbSlide>
+                                  <ng-container class="picsum-img-wrapper" [class]="(b === 0) ? 'active' : ''">
+                                    <img [src]="srvroot + 'upload/' + img.image" class="pic bigimg" alt="" (load)="img.loaded = true;"/>
+                                  </ng-container>
+                                  <mat-spinner id="spinimgid" class="picsum-img-wrapper imgart" [hidden]="img.loaded"></mat-spinner>
+                                </ng-template>
+                              }
+                            </ngb-carousel>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                  <div [hidden]="!art.qte">
+                    <mat-form-field class="fullwidth">
+                      <textarea matInput placeholder="Saisissez ici vos besoins spécifiques sur cet article" maxlenght="300"></textarea>
+                    </mat-form-field>
+                    <div class="divopt" [hidden]="method <= 0" [hidden]="!art.groupes.length">
+                      <div class="slidepb" [style.display]="method > 0 ? 'flex' : 'none'">
+                        <p class="sli">{{ art.nom }}&nbsp;numéro&nbsp;</p>
+                        <img class="arrow bts" src="assets/img/left-arrow.png" (click)="setart(art, -1)" [style.opacity]="art.current === 1 ? '0.5' : '1'" [style.pointerEvents]="art.current === 1 ? 'none' :'auto'" />
+                        <p class="curarticle sli cursor"> {{ art.current }} </p>
+                        <img class="arrow bts" src="assets/img/right-arrow.png" (click)="setart(art, +1)" [style.opacity]="art.current === art.qte ? '0.5' : '1'" [style.pointerEvents]="art.current === art.qte ? 'none' :'auto'" />
+                        <p class="curarticle sli cursor"> / {{ art.qte }} </p>
+                      </div>
+                      <div class="divopt2" [hidden]="method <= 0">
+                        @for (grp of art.groupes; track grp; let d = $index) {
+                          <div class="flexsp">
+                            <mat-form-field>
+                              <mat-label>{{ grp.nom }} {{!grp.multi ? '(unique)' : '(multiple)' }}<br></mat-label>
+                              <mat-select class="selb" [multiple]="grp.multi" [value]="grp.selection[art.current-1]" (selectionChange)="setNewValue($event.value, art, d, art.current); totaliser();">
+                                @for (opt of grp.options; track opt; let e = $index) {
+                                  <mat-option [value]="opt.id">{{ opt.surcout > 0 ? opt.nom + ' + ' + (opt.surcout | number : '1.2-2') + ' € ' : opt.nom }}</mat-option>
+                                }
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
+            }
+          </div>
+        }
+      }
+    </div>
+  </div>
+  <div #footer id="footer" [hidden]="!loadingState">
+    <div class="grpbn">
+      <button mat-button id="totaliseur" class="navindic" [hidden]="method <= 0" [disabled]="true">Total : {{ (somme| number : '1.2-2') }}</button>
+      <button mat-button id="validcarte" class="navindic" [hidden]="method <= 0" [disabled]="method<=0" (click)="Poursuivre()">Poursuivre</button>
+    </div>
+  </div>
+  @if (getShowBarre()) {
+    <div id="barre">Ce site utilise des cookies<div id="fermer" (mousedown)="setShowBarre(true)"></div></div>
+  }
+</body>
