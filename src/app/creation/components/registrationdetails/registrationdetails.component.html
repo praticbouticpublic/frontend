@@ -1,0 +1,100 @@
+<body ondragstart="return false;" ondrop="return false;">
+  <div id="screen">
+    <img id='bandeauh' src='assets/img/bandeau_haut.png' (click)="quittermenu()" class='' alt="">
+    <div id="workspace" class="spaceflex vcm">
+      @if (loadingstate) {
+        <div class="loadscreen vcm">
+          <mat-spinner></mat-spinner>
+        </div>
+      }
+      <div id="mainmenu" class="elemcb vcm" [hidden]="loadingstate">
+        <!--<img id="logopbid" src="assets/img/logo.png" class="logopbidbig epure vcm" alt="">-->
+        <img id='filetape2' src="assets/img/timeline-etape-2.png?v=1.001" class="fileelem" alt="">
+        <div class="filecontainer vcm">
+          <div id='mainform' class="customform notobig">
+            <p class="center middle title">
+              Formulaire d'inscription client
+            </p>
+            <form [formGroup]="regdetailsFormGroup" (ngSubmit)="onSubmitRegdetails()" novalidate class="colform">
+              <div class="param rwse scaleddown">
+                <div class="param center">
+                  <mat-radio-group aria-label="Civilité : " formControlName="qualite">
+                    <mat-radio-button class="paramfieldc center" type="radio" id="femme" name="qualite" value="Madame">&nbsp;Madame&nbsp;</mat-radio-button>
+                    <mat-radio-button class="paramfieldr center" type="radio" id="homme" name="qualite" value="Monsieur" required>&nbsp;Monsieur&nbsp;</mat-radio-button>
+                    @if (isSubmited && regdetailsFormGroup.get('qualite')?.invalid) {
+                      <mat-error>Une civilité est requise</mat-error>
+                    }
+                  </mat-radio-group>
+                  <br>
+                  </div>
+                </div>
+                <mat-form-field class="param scaleddown">
+                  <input matInput formControlName="nom" class="paramfieldc" id="nom" name="nom" type="text" placeholder="Nom" value="" maxlength="60" required><br>
+                  <mat-error>Le nom est requis (60 car. max.)</mat-error>
+                </mat-form-field>
+                <mat-form-field class="param scaleddown">
+                  <input matInput formControlName="prenom" class="paramfieldc" id="prenom" name="prenom" type="text" placeholder="Prénom" value="" maxlength="60" required><br>
+                  <mat-error>Le prénom est requis (60 car. max.)</mat-error>
+                </mat-form-field>
+                <mat-form-field class="param scaleddown">
+                  <input matInput formControlName="adr1" class="paramfieldc" id="adr1" name="adr1" type="text" placeholder="Adresse (ligne 1)" value="" maxlength="150" required><br>
+                  <mat-error>Une première ligne d'adresse est requise (150 car. max.)</mat-error>
+                </mat-form-field>
+                <mat-form-field class="param scaleddown">
+                  <input matInput formControlName="adr2" class="paramfieldc" id="adr2" name="adr2" type="text" placeholder="Adresse (ligne 2)" value="" maxlength="150"><br>
+                  <mat-error>(150 car. max.)</mat-error>
+                </mat-form-field>
+                <div class="flxcol">
+                  <div class="twocol scaleddown">
+                    <mat-form-field class="param enlarged">
+                      <input matInput formControlName="cp" class="paramfieldc" id="cp" name="cp" type="text" placeholder="Code Postal" value="" maxlength="5" pattern="[0-9]{5}" required title="Il faut un code postal français valide"><br>
+                      <mat-error>Un code postal contenant 5 chiffres est requis</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="param enlarged">
+                      <input matInput formControlName="ville" class="paramfieldc" id="ville" name="ville" type="text" placeholder="Ville" value="" maxlength="50" required><br>
+                      <mat-error>La ville est requise (50 car. max.)</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <mat-form-field class="param scaleddown">
+                    <input matInput formControlName="tel" class="paramfieldc" id="tel" name="tel" type="text" placeholder="Téléphone" value="" autocomplete="tel" maxlength="60" pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[0-9](?:[\.\-\s]?\d\d){4}$" title="Il faut un numéro de téléphone français valide"><br>
+                    <mat-error>Un téléphone français valide est requis</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="flxcol">
+                  <div class="param scaleddown">
+                    <mat-form-field class="enlarged">
+                      <input matInput formControlName="pass" class="paramfieldc inputeye" id="pass" maxlength="255" name="pass" type="password" placeholder="Créez votre mot de passe" value="" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%&*?]).{8,}" title="Doit contenir au moins un chiffre, une majuscule, une minuscule, un signe parmi !@#$%&*? et être de au moins 8 caractères" autocomplete="new-password" [type]="hide ? 'password' : 'text'" required>
+                      <mat-icon (click)="hide = !hide" matSuffix>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </mat-form-field>
+                  </div>
+                  <div class="param scaleddown">
+                    <mat-form-field class="enlarged">
+                      <input formControlName="passconf" matInput class="paramfieldc inputeye" id="passconf" maxlength="255" name="passconf" type="password" placeholder="Mot de passe(confirmation)" value="" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%&*?]).{8,}" title="Doit contenir au moins un chiffre, une majuscule, une minuscule, un signe parmi !@#$%&*? et être de au moins 8 caractères" autocomplete="new-password" [type]="hideconf ? 'password' : 'text'" required>
+                      <mat-icon (click)="hideconf = !hideconf" matSuffix>{{ hideconf ? 'visibility_off' : 'visibility' }}</mat-icon>
+                    </mat-form-field>
+                  </div>
+                  @if (isSubmited && (regdetailsFormGroup.get('pass')?.invalid || regdetailsFormGroup.get('passconf')?.invalid)) {
+                    <mat-error>Le mot de passe et sa confirmation sont requis</mat-error>
+                  }
+                  <mat-label class="passinfo">Le mot de passe doit contenir au moins un chiffre, une majuscule, une minuscule, un signe parmi !&#64;#$%&*? et être de au moins 8 caractères</mat-label>
+                </div>
+                <br>
+                  <div class="param scaleddown">
+                    <mat-card-actions>
+                      <button [disabled]="loadingstate" mat-fab extended color="primary" class="btn btn-primary btn-block btn-valider regsubmit" type="submit" autofocus>
+                        <mat-icon>send</mat-icon>
+                        JE CONTINUE
+                      </button><br><br>
+                      <mat-label class="changeable">Les informations pourront être modifié par la suite à partir de votre espace</mat-label>
+                    </mat-card-actions>
+                  </div>
+                  <br>
+                  </form>
+                </div>
+                <img id='illus1' src='assets/img/illustration_3.png' class='elemcb epure' alt="">
+              </div>
+            </div>
+          </div>
+          <img id='bandeaub' src='assets/img/bandeau_bas.png' (click)="quittermenu()" class='epure' alt="">
+        </div>
+      </body>

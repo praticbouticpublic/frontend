@@ -1,0 +1,51 @@
+<body ondragstart="return false;" ondrop="return false;">
+<div id="screen">
+  <img id='bandeauh' src='assets/img/bandeau_haut.png' (click)="quittermenu()" class="" alt="" [hidden]="loadingstate">
+  <div id="workspace" class="spacemodal">
+    <mat-spinner class="vcm" [hidden]="!loadingstate"></mat-spinner>
+    <div id="mainmenu" class="elemcb vcm" [hidden]="loadingstate">
+      <div class="modal-content-mainmenu modal-content-cb">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin($event)">
+          <div class="modal-header modal-header-mainmenu modal-header-cb scaleddown">
+            @if (prod)
+            {
+              <div class="modal-title-cb">{{ environ }} v.{{ version }}  </div>
+            }
+            <h6 class="modal-title-cb"><b>JE ME CONNECTE</b></h6>
+          </div>
+          <div class="modal-body modal-body-mainmenu modal-body-cb">
+            <mat-form-field class="example-full-width enlarged scaleddown">
+              <mat-label>Courriel</mat-label>
+              <input formControlName="identifiant" type="email" matInput placeholder="Ex. patrice@exemple.fr" id="emailid" name="email" color="accent">
+            </mat-form-field>
+            <mat-form-field class="example-full-width enlarged scaleddown">
+              <mat-label>Mot de passe</mat-label>
+              <input matInput formControlName="motdepasse" [type]="hide ? 'password' : 'text'" placeholder="" id="passid" name="pass" color="accent">
+              <mat-icon matSuffix (click)="hide = !hide" color="primary">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>
+          </div>
+          <div class="modal-footer-mainmenu enlarged">
+            <button [disabled]="isSubmitted" mat-fab extended color="primary" class="btn btn-primary btn-block btn-valider enlarged scaleddown" type="submit">
+              VALIDER
+            </button>
+            <!--<br>-->
+            <asl-google-signin-button class="agsb" type='standard' size='medium' shape='pill'></asl-google-signin-button>
+            <!--<br>-->
+            <mat-label class="txt-noboutic scaleddown">PAS ENCORE DE BOUTIC ?</mat-label>
+            <button [disabled]="isSubmitted" type="button" mat-fab extended color="secondary" class="btn btn-secondary btn-block btn-creationboutic enlarged scaleddown" (click)="gocreerboutique()">
+              JE CR&Eacute;E MA BOUTIC
+            </button>
+            <br>
+            <button  type="button" mat-fab extended (click)="goToHome()" color="primary" class="btn btn-renvoyer btn-block enlarged scaleddown">JE SUIS CLIENT</button>
+          </div>
+        </form>
+      </div>
+      <nav>
+        <a class="mr-auto mdfaddlink forgotpwd" (click)="gotoforgotpassword()">Mot de passe oublié ?</a>
+      </nav>
+    </div>
+    <img id='illus1' src='assets/img/illustration_0.png' class='elemcb epure vcm' alt="" [hidden]="loadingstate">
+  </div>
+  <img id='bandeaub' src='assets/img/bandeau_bas.png' (click)="quittermenu()" class="epure" alt="" [hidden]="loadingstate">
+</div>
+</body>

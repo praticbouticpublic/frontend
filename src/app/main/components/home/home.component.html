@@ -1,0 +1,52 @@
+<body ondragstart="return false;" ondrop="return false;">
+  <div id="screen">
+    <img id='bandeauh' src='assets/img/bandeau_haut.png' (click)="quittermenu()" class="" alt="" [hidden]="loadingState">
+    <div id="workspace" class="spacemodal">
+      <div class="tile">
+        <!--<div class="center" *ngIf="loadingState">
+        <mat-spinner></mat-spinner>
+      </div>-->
+      <form class="example-form">
+        <div class="example-full-width">
+          <!--<div class="flexcenter res34">
+          <img src="./../../../../assets/img/logo-pratic-boutic.png"/>
+        </div>-->
+        <mat-form-field class="enlargedxl" appearance="outline" color="accent">
+          <mat-label>Choisissez votre Boutic</mat-label>
+          <input type="text" aria-label="Choisissez votre Boutic"
+            matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)='routeTo($event.option.value)'>
+            @for (option of filteredOptions | async; track option) {
+              <mat-option [value]="option.alias">{{option.nom}}</mat-option>
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+        <div class="smalltf">
+          <mat-label class="greyfont">OU</mat-label>
+          <mat-label class="greyfont">Scanner votre QR code Praticboutic</mat-label>
+        </div>
+        <div class="contain">
+          <!-- For camera -->
+          <ngx-scanner-qrcode #action="scanner" [config]="config" (event)="onEvent($event, action)"></ngx-scanner-qrcode>
+          <!-- devices -->
+          <div class="row">
+            <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 my-1">
+              <select #select1 (change)="action.playDevice(select1.value)" class="form-select form-select-md">
+                <option [value]="null" selected>Select device</option>
+                @for (c of action.devices.value; track c; let i = $index) {
+                  <option [value]="c.deviceId" [selected]="i == action.deviceIndexActive">{{c.label}}</option>
+                }
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="commercant">
+          <a mat-flat-button color="accent" href="/admin/main"><div class="smalltb">JE SUIS COMMERÇANT</div></a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<img id='bandeaub' src='assets/img/bandeau_bas.png' (click)="quittermenu()" class="epure" alt="" [hidden]="loadingState">
+</div>
+</body>

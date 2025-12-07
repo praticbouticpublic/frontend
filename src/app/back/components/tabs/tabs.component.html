@@ -1,0 +1,13 @@
+<div class="">
+  <p class="title">{{ title | titlecase }}</p>
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel" color="accent">
+    @for (link of links; track link; let idx = $index) {
+      <a mat-tab-link [routerLink]="link.action" [active]="activeLink === idx" (click)="activeLink = idx;this.bakLastTab()" [routerLinkActive]="link.active ? 'active': ''">{{ link.nom | uppercase }}</a>
+    }
+  </nav>
+</div>
+<div class="">
+  <mat-tab-nav-panel #tabPanel>
+    <router-outlet></router-outlet>
+  </mat-tab-nav-panel>
+</div>

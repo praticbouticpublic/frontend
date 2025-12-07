@@ -1,0 +1,24 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="qrcodegenForm" (ngSubmit)="onSubmit()" >
+      <mat-radio-group formControlName="methv" id="methvid" allow-empty-selection="false" name="radio-group" aria-label="Méthode de vente:">
+        <mat-radio-button id="methtableid" name="methv" value="2">A Table</mat-radio-button>
+        <mat-radio-button id="methqnc" name="methv" value="3">Qlick'n'Collect</mat-radio-button>
+      </mat-radio-group>
+      <br>
+        @if (qrcodegenForm.value.methv === '2') {
+          <mat-form-field>
+            <mat-label id="optnbtable">Nombre de table : </mat-label>
+            <input matInput formControlName="nbtable" id="nbtableid" type="number" class="inpprix" name="nbtable" step="1" min="1" value="1" />
+          </mat-form-field>
+        }
+        <br>
+          <mat-form-field>
+            <mat-label>Nombre d'exemplaire : </mat-label>
+            <input matInput formControlName="nbex" id="nbexid" type="number" class="inpprix" name="nbex" step="1" min="1" value="1" />
+          </mat-form-field>
+          <br>
+            <button mat-raised-button color="primary" type="submit">Générer le PDF de QRCode</button>
+          </form>
+        </mat-card-content>
+      </mat-card>

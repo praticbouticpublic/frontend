@@ -1,0 +1,156 @@
+@use '@angular/material' as mat;
+
+@include mat.elevation-classes();
+@include mat.app-background();
+
+$bright-navy-blue-palette: (
+  50: #e3f2fd,
+  100: #c2e4ff,
+  200: #9fd5ff,
+  300: #7cc6ff,
+  400: #5ebaff,
+  500: #009cdb,
+  600: #008bd4,
+  700: #0072bd,
+  800: #0058a6,
+  900: #003a86,
+  A100: #addcff,
+  A200: #6aa8ff,
+  A400: #1f9eff,
+  A700: #00518f,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: rgba(black, 0.87),
+    A700: white,
+  )
+);
+
+$gainsboro-palette: (
+  50: #F9F9FA,
+  100: #F2E2EE,
+  200: #EBBBD9,
+  300: #E495C4,
+  400: #DD6EAE,
+  500: #E6007E,
+  600: #D10071,
+  700: #BA005F,
+  800: #A3004C,
+  900: #8C003A,
+  A100: #FFD2E9,
+  A200: #FF9ACF,
+  A400: #FF62B5,
+  A700: #FF499F,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: rgba(black, 0.87),
+    A700: white,
+  )
+);
+
+$crimson-palette: (
+  50: #ffebef,
+  100: #ffcdc5,
+  200: #f0999f,
+  300: #e77179,
+  400: #f24e58,
+  500: #f83a40,
+  600: #e9313e,
+  700: #d72638,
+  800: #ca1e30,
+  900: #bb0d24,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$bluesky-primary: mat.m2-define-palette($bright-navy-blue-palette, 700, 500, 900, 900);
+$bluesky-accent: mat.m2-define-palette($gainsboro-palette, 500, 100, 300);
+$bluesky-warn: mat.m2-define-palette($crimson-palette, 700);
+
+$bluesky-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $bluesky-primary,
+    accent: $bluesky-accent,
+    warn: $bluesky-warn,
+  )
+));
+
+@include mat.all-component-themes($bluesky-theme);
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&amp;display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap');
+
+.alternate-theme {
+  $alternate-typography: mat.m2-define-typography-config(
+    $font-family: 'Montserrat',
+  );
+  $alternate-theme: mat.m2-define-light-theme((
+    typography: $alternate-typography,
+   ));
+   //@include mat.all-component-themes($alternate-theme);
+}
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Montserrat" }
+
+
+
+
+a {
+  --mat-button-filled-container-shape:9999px;
+}
+.modal-body > mat-form-field > div
+{
+  --mdc-filled-text-field-container-shape: 25px;
+  border-radius: 25px !important;
+  //height: 0.5px;
+}
+
+.modal-body > mat-form-field > .mat-mdc-form-field-subscript-wrapper
+{
+  height: 0.5px;
+}
+
+mat-form-field > div
+{
+  --mdc-filled-text-field-container-shape: 25px;
+  border-radius: 25px !important;
+  height: 0.5vh;
+}
+
+mat-checkbox > div > div .mdc-checkbox__background {
+  border-radius: 25px !important;
+}

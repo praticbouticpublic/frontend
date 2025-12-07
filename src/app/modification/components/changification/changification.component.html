@@ -1,0 +1,42 @@
+<div id="screen">
+  <img id='bandeauh' src='assets/img/bandeau_haut.png' (click)="quittermenu()" alt="" [hidden]="">
+  <div id="workspace" class="spacemodal">
+    <img id="logopbid" src="assets/img/logo.png" class="logopbidbig depure" alt="">
+    <div class="container">
+      @if (loadingstate) {
+        <div class="loadscreen">
+          <mat-spinner></mat-spinner>
+        </div>
+      }
+      <div class="modal-content-mainmenu modal-content-cb">
+        <form [formGroup]="changificationFormGroup" (ngSubmit)="onSubmitChangification()" novalidate>
+          <div class="modal-header modal-header-mainmenu modal-header-cb">
+            <img id='logopbid' class='logopbidbig' src='assets/img/LOGO_PRATIC_BOUTIC.png' alt="">
+            <h6 class="modal-title-cb">IDENTIFICATION</h6>
+          </div>
+          <div class="modal-body modal-body-mainmenu modal-body-cb">
+            <mat-form-field class="example-full-width">
+              <mat-label>Code : </mat-label>
+              <input matInput formControlName="code" id="code" name="code" type="text" placeholder="Code" formControlName="code"
+                title="6 chiffres" />
+              @if (changificationFormGroup.hasError('pattern') && !changificationFormGroup.hasError('required')) {
+                <mat-error class="error ion-padding">
+                  Le code envoyé sur votre courriel est requis
+                </mat-error>
+              }
+            </mat-form-field>
+            <button #btnSendCode mat-flat-button class="actionbutton txtcenter" (click)="sendCode(btnSendCode)" color="primary" class="btn btn-primary btn-block btn-valider enlarged">Renvoyer le code</button>
+          </div>
+          <br>
+            <div class="modal-footer-mainmenu">
+              <button mat-fab extended color="primary" class="btn btn-primary btn-block btn-valider enlarged" type="submit">
+                VALIDER
+              </button>
+            </div>
+          </form>
+        </div>
+        <img id='illus2' src='assets/img/illustration_2.png' class='elemcb epure' alt="">
+      </div>
+    </div>
+    <img id='bandeaub' src='assets/img/bandeau_bas.png' (click)="quittermenu()" class="epure" alt="" [hidden]="">
+  </div>

@@ -1,0 +1,49 @@
+<body ondragstart="return false;" ondrop="return false;">
+  <div id="screen">
+    <img id='bandeauh' src='assets/img/bandeau_haut.png' (click)="quittermenu()"  class='' alt="">
+    <div id="workspace" class="spaceflex scrolly">
+      @if (loadingstate) {
+        <div class="loadscreen">
+          <mat-spinner></mat-spinner>
+        </div>
+      }
+      <div id="pagecontainerid" class="pagecontainer" [hidden]="loadingstate">
+        <!--<img id="logopbid" src="assets/img/logo.png" class="logopbidbig depure" alt="">-->
+        <img id='filetape5' src="assets/img/timeline-etape-5.png?v=1.001" class="fileelem" alt="">
+        <div class="filecontainer">
+          <div id="spaceid" class="spaceflex">
+            <div class="customform tiersspacemax alternate-theme">
+              <p class="center middle title">
+                Je saisie mes informations de paiement
+              </p>
+              <p class="montserrat">Le montant des frais mensuel d'abonnementd'élève à 3.3% de commission de votre chiffre d'affaires.<br>
+                <b>Sans engagement</b> - Vous pouvez résilier votre abonnement à tous moment.</p>
+                <div [formGroup]="paymentElementForm">
+                  <ngx-stripe-card class="stripe" [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
+                  <br>
+                    <mat-form-field class="scaleddown cor" appearance="fill">
+                      <input matInput placeholder="Nom" formControlName="nom" />
+                    </mat-form-field>
+                    <div class="param scaleddown">
+                      @if (environment.formulechoice == 1 || environment.formulechoice == 2) {
+                        <section class="param rwc centerable">
+                          <mat-checkbox id="cgvid" name="cgv" (click)="allow()" class="grey">J'accepte <a class="greylink" (click)="gotoCGV(type)"><u>les conditions générales de vente</u></a></mat-checkbox>
+                        </section>
+                      }
+                      <mat-card-actions class="matcardaction scaleddown">
+                        <button mat-fab [disabled]="isSubmitted || !allowcgv" extended color="primary" class="btn btn-primary btn-block btn-valider regsubmit" (click)="pay()" autofocus>
+                          <mat-icon>send</mat-icon>
+                          C'EST PARTI !
+                        </button>
+                      </mat-card-actions>
+                    </div>
+                  </div>
+                </div>
+                <img id='illus8' src='assets/img/illustration_8.png' class='epure' alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <img id='bandeaub' src='assets/img/bandeau_bas.png' (click)="quittermenu()" class='epure' alt="">
+      </div>
+    </body>

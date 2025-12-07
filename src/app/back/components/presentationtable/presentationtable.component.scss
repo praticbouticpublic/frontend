@@ -1,0 +1,40 @@
+.demo-table {
+  width: 100%;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  background-color: #e2007a;
+  color:white;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  width: 100%;
+}
+
+.mat-mdc-fab
+{
+  color: white;
+}
+
+.textblack > td
+{
+  color: black;
+}
+
+.textwhite > td
+{
+  color: white;
+}
+

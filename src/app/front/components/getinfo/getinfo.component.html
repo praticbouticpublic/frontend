@@ -1,0 +1,127 @@
+<body ondragstart="return false;" ondrop="return false;" onmousedown="return false" onselectstart="return false">
+  <div #header id="header">
+    <a href="admin/home"><img id="mainlogo" src="assets/img/logo-pratic-boutic.png" (load)="setheightfortheBottom()"></a>
+  </div>
+  <form [formGroup]="getinfoFormGroup" name="mainform" (submit)="onSubmit()">
+    <div #main id="main" [style.height]="heightfortheBottom">
+      @if (logo !== undefined)
+      {
+        <img id="logo" [src]="srvroot + 'upload/' + logo" [hidden]="!logo">
+      }
+      <p id="marqueid" class="marque" [hidden]="logo">{{ nom }}</p>
+      <p class="centertitle">Informations commande</p>
+      @if (loadingState) {
+        <div class="spincenter">
+          <mat-spinner id="spinimgid"></mat-spinner>
+        </div>
+      }
+      @if (!loadingState) {
+        <div id="grpinfo" [style.display]="(method > 0) ? 'block' : 'none'">
+          <mat-form-field class="fullwidth" id="blocnomid" [style.display]="(method > 2) ? 'flex' : 'none'">
+            <mat-label>Nom&nbsp;:&nbsp;</mat-label>
+            <input matInput formControlName="clnom" class="cont" type="string" id="lenom" name="nom" maxlength="60" required>
+            <mat-error>Un nom est requis</mat-error>
+          </mat-form-field>
+          <mat-form-field class="fullwidth" id="blocprenomid" [style.display]="(method > 2) ? 'flex' : 'none'">
+            <mat-label>Pr&eacute;nom&nbsp;:&nbsp;</mat-label>
+            <input matInput formControlName="clprenom" class="cont" type="string" id="leprenom" name="prenom" maxlength="60" required>
+            <mat-error>Un prénom est requis</mat-error>
+          </mat-form-field>
+          <mat-form-field class="fullwidth">
+            <mat-label>T&eacute;l.&nbsp;Portable&nbsp;:&nbsp;</mat-label>
+            <input matInput formControlName="cltel" class="cont" type="string" id="letel" name="tel" autocomplete="tel" maxlength="60" required
+              pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[6-7](?:[\.\-\s]?\d\d){4}$"
+              title="Il faut un numéro de téléphone portable français valide">
+            <mat-error>Il faut un numéro de téléphone portable français valide</mat-error>
+          </mat-form-field>
+          <div class="panneau" id="met" [style.display]="(method > 2) ? 'block' : 'none'">
+            <div id="model">
+              <mat-radio-group formControlName="vente">
+                <div id="blemporter" [style.display]="(chm === 'TOUS' ||chm === 'EMPORTER') ? 'block' : 'none'">
+                  <mat-radio-button [style.display]="(chm === 'TOUS') ? 'inline-block' : 'none'" class="paiers pink-label pink-radios" name="choixmeth" id="lemporter" value="EMPORTER" (change)="eraseAdrLivr(true);removeFraisLivraison()">Je viens récupérer ma commande</mat-radio-button>
+                  <mat-label [style.display]="(chm === 'EMPORTER') ? 'inline-block' : 'none'">Je viens récupérer ma commande</mat-label>
+                </div>
+                <div class="spcpandetail" id="spdemporter" [style.display]="(chm === 'TOUS' ||chm === 'EMPORTER') ? 'block' : 'none'"></div>
+                <mat-label class="pandetail" id="pdemporter" [style.display]="(chm === 'TOUS' ||chm === 'EMPORTER') ? 'inline-block' : 'none'">{{ cmemp }}</mat-label>
+                <div id="bllivrer" [style.display]="(chm === 'TOUS' ||chm === 'LIVRER') ? 'block' : 'none'">
+                  <mat-radio-button [style.display]="(chm === 'TOUS') ? 'inline-block' : 'none'" class="paiers pink-label pink-radios" name="choixmeth" id="llivrer" value="LIVRER" (change)="eraseAdrLivr(false);getFraisLivraison();">Je me fais livrer</mat-radio-button>
+                  <mat-label [style.display]="(chm === 'LIVRER') ? 'inline-block' : 'none'">Je me fais livrer</mat-label>
+                </div>
+                <div class="spcpandetail" id="spdlivrer" [style.display]="(chm === 'TOUS' ||chm === 'LIVRER') ? 'block' : 'none'"></div>
+                <mat-label class="pandetail" id="pdlivrer" [style.display]="(chm === 'TOUS' ||chm === 'LIVRER') ? 'inline-block' : 'none'">{{ cmlivr }}</mat-label>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div id="adrlivr" formGroupName="adrlivr" [hidden]="!showadrlivr">
+            <mat-form-field class="fullwidth">
+              <mat-label>Adresse&nbsp;1&nbsp;:&nbsp;</mat-label>
+              <input matInput formControlName="ligne1" class="cont adrliv" type="string" id="ladresse1" name="adresse1" maxlength="150" required>
+              <mat-error>Une ligne d'adresse est requise</mat-error>
+            </mat-form-field>
+            <mat-form-field class="fullwidth">
+              <mat-label>Adresse&nbsp;2&nbsp;:&nbsp;</mat-label>
+              <input matInput formControlName="ligne2" class="cont adrliv" type="string" id="ladresse2" name="adresse2" maxlength="150">
+            </mat-form-field>
+            <mat-form-field class="fullwidth">
+              <mat-label>Code&nbsp;Postal&nbsp;:&nbsp;</mat-label>
+              <input matInput formControlName="codepostal" class="cont adrliv" type="string" id="lecp" name="cp" maxlength="5" required
+                pattern="[0-9]{5}" title="Il faut un code postal français valide">
+              <mat-error>Il faut un code postal à cinq chiffres</mat-error>
+            </mat-form-field>
+            <mat-form-field class="fullwidth">
+              <mat-label>Ville&nbsp;:&nbsp;</mat-label>
+              <input matInput formControlName="ville" class="cont adrliv" type="string" id="laville" name="ville" maxlength="50" required>
+              <mat-error>Une ville est requise</mat-error>
+            </mat-form-field>
+            @if (frais !== null) {
+              <div class="panneau" id="fraislivrid" #fraislivr>Frais&nbsp;de&nbsp;livraison&nbsp;:&nbsp;{{ frais | number : '1.2-2' }}&nbsp;€</div>
+            }
+          </div>
+        </div>
+      }
+      <hr id="separationid" class="separation" [style.display]="(method > 0) ? 'block' : 'none'">
+      <div class="panneau" id="paye" [style.display]="(method > 2) ? 'block' : 'none'">
+        <div id="modep">
+          <mat-radio-group formControlName="paiement">
+            <div id="blcomptant" [style.display]="(chp === 'TOUS' || chp === 'COMPTANT') ? 'block' : 'none'">
+              <mat-radio-button [style.display]="(chp === 'TOUS') ? 'inline-block' : 'none'" class="paiers pink-radios" name="choixpaie" id="pcomptant" value="COMPTANT">Je&nbsp;paye&nbsp;en&nbsp;ligne&nbsp;</mat-radio-button><br>
+              <mat-label [style.display]="( chp === 'COMPTANT') ? 'inline-block' : 'none'" class="paiers">Je&nbsp;paye&nbsp;en&nbsp;ligne&nbsp;</mat-label>
+            </div>
+            <div class="spcpandetail" id="spdcomptant" [style.display]="(chp === 'TOUS' || chp === 'COMPTANT') ? 'block' : 'none'"></div>
+            <mat-label class="pandetail"  id="pdcomptant" [style.display]="(chp === 'TOUS' || chp === 'COMPTANT') ? 'inline-block' : 'none'">{{ cmpt }}</mat-label>
+            <div id="bllivraison" [style.display]="(chp === 'TOUS' || chp === 'LIVRAISON') ? 'block' : 'none'">
+              <mat-radio-button [style.display]="(chp === 'TOUS') ? 'inline-block' : 'none'" class="paiers pink-radios" name="choixpaie" id="plivraison" value="LIVRAISON">Je&nbsp;paye&nbsp;à&nbsp;la&nbsp;livraison&nbsp;</mat-radio-button>
+              <mat-label [style.display]="( chp === 'LIVRAISON') ? 'inline-block' : 'none'" class="paiers">Je&nbsp;paye&nbsp;à&nbsp;la&nbsp;livraison&nbsp;</mat-label>
+            </div>
+            <div class="spcpandetail" id="spdlivraison" [style.display]="(chp === 'TOUS' || chp === 'LIVRAISON') ? 'block' : 'none'"></div>
+            <mat-label class="pandetail" id="pdlivraison" [style.display]="(chp === 'TOUS' || chp === 'LIVRAISON') ? 'inline-block' : 'none'">{{ livr }}</mat-label>
+          </mat-radio-group>
+        </div>
+      </div>
+      <mat-form-field class="fullwidth">
+        <mat-label>Code Promo.&nbsp;:&nbsp;</mat-label>
+        <input matInput formControlName="codepromo" class="cont" type="string" id="lecodepromo" name="codepromo" maxlength="8" pattern="[0-9A-Z]{8}" (keyup)="getRemise()">
+        <mat-error>Le code Promo. doit contenir 8 chiffres/majuscules</mat-error>
+      </mat-form-field>
+      @if (rem !== null) {
+        <div class="panneau" id="remiseid" #remise>Montant de la remise : {{ rem | number : '1.2-2' }} €</div>
+      }
+      <section>
+        <mat-checkbox formControlName="cgv" id="chkcgv" name="okcgv" value="valcgv" color="primary">J'accepte <a id="cgvlink" (click)="gotoCGV()">les conditions générales de vente</a></mat-checkbox>
+      </section>
+      <br>
+        <mat-form-field class="fullwidth">
+          <textarea formControlName="infosup" matInput id="infosup" name="infosup" placeholder="Informations supplémentaires (date, heure, code interphone, ...)" maxlength="300"></textarea>
+        </mat-form-field>
+      </div>
+      <div #footer id="footer" [hidden]="loadingState">
+        <div id="grpbnid" class="grpbn" [style.display]="(method > 0) ? 'block' : 'none'">
+          <input id="validcarte" class="navindic" type="submit">
+          <input id="retourcarte" class="navindic" type="button" value="Retour" (click)="Retour()">
+        </div>
+      </div>
+    </form>
+    @if (getShowBarre()) {
+      <div id="barre">Ce site utilise des cookies<div id="fermer" (mousedown)="setShowBarre(true)"></div></div>
+    }
+  </body>

@@ -1,0 +1,44 @@
+<div class="flexrow">
+  <div class="pfixed">
+    <mat-nav-list class="vertical-nav" id="sidebar" [style.width]="menuwidth">
+      <div class="fullsidebar">
+        <img id='closemenu' src="assets/img/close.svg" (click)="closeSidebar()" height="24px" width="24px" />
+      </div>
+      <div class="fullsidebar">
+        <div class="blc">
+          <img id='logopblid' src="assets/img/LOGO_PRATIC_BOUTIC.png" align="center"/>
+          <p class="txthcenter">Bienvenue</p>
+          <p class="smalltxt">{{ identifiant }}</p>
+        </div>
+      </div>
+      <a id='orders' mat-list-item [routerLink]="['tabs/orders/displaytable/commande']" (click)="bakRubrique($event);closeSidebar()">
+        <img class='picto' src='assets/img/picto_mes-commandes.png' height="25" width="25" /><span matLine>Mes Commandes</span>
+      </a>
+      <a id='products' mat-list-item routerLinkActive="active" [routerLink]="['tabs/products/displaytable/article']" (click)="bakRubrique($event);closeSidebar()">
+        <img class='picto' src='assets/img/picto_mes-produits.png' height="25" width="25" /><span matLine>Mes Produits</span>
+      </a>
+      <a id='deliveries' mat-list-item [routerLink]="['tabs/deliveries/displaytable/barlivr']" (click)="bakRubrique($event);closeSidebar()">
+        <img class='picto' src='assets/img/LIVRAISON.png' height="25" width="25" /><span matLine>Livraisons</span>
+      </a>
+      <a id='discounts' mat-list-item [routerLink]="['tabs/discounts/displaytable/promotion']" (click)="bakRubrique($event);closeSidebar()">
+        <img class='picto' src='assets/img/picto_promo.png' height="25" width="25" /><span matLine>Mes Promotions</span>
+      </a>
+      <a id='money' mat-list-item [routerLink]="['money']" (click)="bakRubrique($event);closeSidebar()">
+        <img class='picto' src='assets/img/picto_argent.png' height="25" width="25" /><span matLine>Mon Argent</span>
+      </a>
+      <a id='customerarea' mat-list-item [routerLink]="['tabs/customerarea/shop']" (click)="bakRubrique($event);closeSidebar()">
+        <img class='picto' src='assets/img/picto_mon_compte.png' height="25" width="25" /><span matLine>Espace Client</span>
+      </a>
+      <a id='subscriptions' mat-list-item [routerLink]="['subscriptions']" (click)="bakRubrique($event);closeSidebar()">
+        <img class='picto' src='assets/img/picto_abonnement.png' height="25" width="25" /><span matLine>Abonnement</span>
+      </a>
+      <a id='exit' mat-list-item [routerLink]="['../exit']" (click)="closeSidebar()">
+        <img class='picto' src='assets/img/picto_deconnexion.png' height="25" width="25" /><span matLine>Déconnexion</span>
+      </a>
+    </mat-nav-list>
+  </div>
+  <div class="page-content">
+    <img id="sidebarico" src="assets/img/sidebar.svg" alt="Menu latéral" height="32" width="32" (click)="openSidebar()" />
+    <router-outlet></router-outlet>
+  </div>
+</div>

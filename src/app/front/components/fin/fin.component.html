@@ -1,0 +1,31 @@
+<body ondragstart="return false;" ondrop="return false;" onmousedown="return false" onselectstart="return false">
+  <div #header id="header">
+    <a href="admin/home"><img id="mainlogo" src="assets/img/logo-pratic-boutic.png" (load)="setheightfortheBottom()"></a>
+  </div>
+  <div id="main" #main [style.height]="heightfortheBottom">
+    @if (logo !== undefined) {
+      <img id="logo" [src]="srvroot + 'upload/' + logo" [hidden]="!logo">
+    }
+    <p id="marqueid" class="marque" [hidden]="logo">{{ nom }}</p>
+    <p class="centertitle">Fin de la commande</p>
+    @if (loadingState) {
+      <div class="spincenter">
+        <mat-spinner id="spinimgid"></mat-spinner>
+      </div>
+    }
+    @if (!loadingState) {
+      <div class="fsub">
+        <p class="panneau acenter" id="envoieok">Votre commande a été envoyée.<br>Nous vous remercions pour votre fidelité.<br></p>
+      </div>
+    }
+  </div>
+  <div #footer id="footer" [hidden]="loadingState">
+    <div class="solobn">
+      <button class="soloindic" id="recommander" (click)="gotoDebut()">Passer une autre commande</button>
+    </div>
+  </div>
+  @if (getShowBarre()) {
+    <div id="barre">Ce site utilise des cookies<div id="fermer" (mousedown)="setShowBarre(true)"></div></div>
+  }
+</body>
+

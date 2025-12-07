@@ -1,0 +1,47 @@
+{
+  "name": "Praticboutic",
+  "short_name": "Praticboutic",
+  "theme_color": "#E6007E",
+  "background_color": "#000000",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "assets/icons/drawable-hdpi-icon.png",
+      "type": "image/png",
+      "sizes": "72x72",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/drawable-ldpi-icon.png",
+      "type": "image/png",
+      "sizes": "36x36",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/drawable-mdpi-icon.png",
+      "type": "image/png",
+      "sizes": "48x48",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/drawable-xhdpi-icon.png",
+      "type": "image/png",
+      "sizes": "96x96",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/drawable-xxhdpi-icon.png",
+      "type": "image/png",
+      "sizes": "144x144",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/drawable-xxxhdpi-icon.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable any"
+    }
+  ]
+}

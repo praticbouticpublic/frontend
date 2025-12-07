@@ -1,0 +1,76 @@
+<body ondragstart="return false;" ondrop="return false;">
+  <div id="screen">
+    <img id='bandeauh' src='assets/img/bandeau_haut.png' (click)="quittermenu()" class="" alt="">
+    <div id="workspace" class="spaceflex">
+      @if (loadingstate) {
+        <div class="loadscreen">
+          <mat-spinner></mat-spinner>
+        </div>
+      }
+      <div id="pagecontainerid" class="pagecontainer" [hidden]="loadingstate">
+        <!--<img id="logopbid" src="assets/img/logo.png" class="logopbidbig depure" alt="">-->
+        <img id='filetape4' src="assets/img/timeline-etape-4.png?v=1.001" class="fileelem" alt="">
+        <div class="filecontainer">
+          <img id='illus6' src='assets/img/illustration_6.png' style="display: none;" class="epure" alt="">
+          <main class="fcb">
+            <div id='mainform' class="customform alternate-theme notobig">
+              <p class="center middle title">
+                Je paramètre ma <span style="color:#e2007a">Pratic</span><span style="color:#6c757d">Boutic</span>
+              </p>
+              <form [formGroup]="shopsetFormGroup" (ngSubmit)="onSubmitShopsettings()" novalidate>
+                <div class="twocol">
+                  <mat-form-field class="param scaleddown">
+                    <mat-label for="activiteid">Mon activité : </mat-label>
+                    <mat-select class="paramfieldc" id="activiteid" name="activite" value="">
+                      <mat-option value='' selected></mat-option>
+                      <mat-option value='COMMERCE'>Commerce</mat-option>
+                      <mat-option value='RESTAURATION'>Restauration</mat-option>
+                      <mat-option value='AUTRES'>Autres</mat-option>
+                    </mat-select><br>
+                  </mat-form-field>
+                  <mat-form-field class="param scaleddown">
+                    <mat-label for="chxmethodeid">Ma méthode de vente : </mat-label>
+                    <mat-select formControlName="chxmethode" class="paramfieldc" id="chxmethodeid" name="chxmethode" value="Emporter & Livrer">
+                      <mat-option value='EMPORTER'>Emporter</mat-option>
+                      <mat-option value='LIVRER'>Livrer</mat-option>
+                      <mat-option value='TOUS' selected>Emporter & Livrer</mat-option>
+                    </mat-select><br>
+                  </mat-form-field>
+                  <mat-form-field class="param scaleddown">
+                    <mat-label for="chxpaieid">Ma méthode de paiement : </mat-label>
+                    <mat-select formControlName="chxpaie" class="paramfieldc" id="chxpaieid" name="chxpaie" value="En ligne & En direct">
+                      <mat-option value='COMPTANT'>En ligne par CB</mat-option>
+                      <mat-option value='LIVRAISON'>En direct par vos moyens</mat-option>
+                      <mat-option value='TOUS' selected>En ligne & En direct</mat-option>
+                    </mat-select><br>
+                  </mat-form-field>
+                  <mat-form-field class="param scaleddown">
+                    <mat-label id="mntmincmdidlbl" for="mntmincmd">Ma commande minimum : </mat-label>
+                    <input class="right-align" formControlName="mntmincmd" matInput id="mntmincmdid" type='number' step='0.01' min='0' name="mntmincmd" placeholder="Montant minimum de commande" value="1.00" /><br>
+                  </mat-form-field>
+                  <mat-label id="labelvalsms" class="montserrat">Ma validation de commande par SMS : </mat-label>
+                  <mat-radio-group aria-labelledby="labelvalsms" formControlName="validsms" class="param scaleddown">
+                    <mat-radio-button class="paramfieldc center" type="radio" id="smson" name="validsms" value="on" required checked>&nbsp;Activé&nbsp;</mat-radio-button>
+                    <mat-radio-button class="paramfieldc center" type="radio" id="smsoff" name="validsms" value="off">&nbsp;Désactivé&nbsp;</mat-radio-button>
+                  </mat-radio-group><br>
+                </div>
+                <br>
+                  <div class="param scaleddown">
+                    <mat-card-actions class="matcardaction">
+                      <button [disabled]="isSubmitted" mat-fab extended color="primary" class="btn btn-primary btn-block btn-valider regsubmit" type="submit" autofocus>
+                        <mat-icon>send</mat-icon>
+                        CONTINUER
+                      </button>
+                      <p class="changeable">Les informations pourront être modifié par la suite à partir de votre espace</p>
+                    </mat-card-actions>
+                  </div>
+                </form>
+              </div>
+            </main>
+            <img id='illus1' src='assets/img/illustration_6.png' class='elemcb epure' alt="">
+          </div>
+        </div>
+      </div>
+      <img id='bandeaub' src='assets/img/bandeau_bas.png' (click)="quittermenu()" class='epure' alt="">
+    </div>
+  </body>

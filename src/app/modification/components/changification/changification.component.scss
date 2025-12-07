@@ -1,0 +1,390 @@
+*
+{
+  touch-action: manipulation;
+}
+
+@media only screen and (min-width:1025px)
+{
+  .depure
+  {
+    display:none !important;
+  }
+
+  #workspace
+  {
+    position: absolute;
+    top: 10.36vw !important;
+    bottom: 6.29vw !important;
+    left: 0px;
+    right: 0px;
+  }
+
+  .modal-content-mainmenu
+  {
+    padding: 4vmin;
+  }
+
+  .btn-nbprimary
+  {
+    flex: 0 0 40% !important;
+  }
+  
+  .btn-nbsecondary
+  {
+    flex: 0 0 40% !important;
+  }
+
+  .fileelem
+  {
+    width: 25%;
+  }
+
+  #bandeauh
+  {
+    width: 100vw !important;
+    height: 5.467vw !important;
+  }
+
+}
+
+@media only screen and (max-width:1024px)
+{
+  .epure
+  {
+    display:none !important;
+  }
+
+  #screen 
+  {
+    height: auto !important;
+    width: auto !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #workspace 
+  {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+  }
+
+  .spacemodal 
+  {
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    align-items: center;
+    width: 95vw;
+    height: 95vh;
+  }
+
+  .modal-content-mainmenu
+  {
+    display:flex;
+    width: 90vw !important;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    padding: 10vmin !important;
+  }
+
+  .logopbidbig
+  {
+    margin-top: 3vw;
+    margin-bottom: 3vw;
+  }
+
+  .modal-body-mainmenu
+  {
+    width: auto !important;
+    margin-bottom: 2vh;
+  }
+
+  .elemcb
+  {
+    margin: 0 !important;
+  }
+
+  .fileelem 
+  {
+    width: 80vw !important;
+    margin: 3vw !important;
+  }
+
+  #bandeauh
+  {
+    width: 100vw !important;
+    height: 5.467vw !important;
+  }
+
+}
+
+@media only screen and (max-width:640px)
+{
+  #bandeauh
+  {
+    width: auto !important;
+    height: 16.67vmin !important;
+    margin-left: -100vmin;
+    margin-right: -100vmin;
+  }
+  
+}
+
+#screen
+{
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+#bandeauh
+{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: auto;
+  z-index: 1;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px #777;
+}
+
+.spacemodal
+{
+  display: flex;
+  justify-content: normal;
+  flex-flow: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+
+/*.mdfaddlink
+{
+	color: #1D1D1B !important;
+	width: 100% !important;
+	text-align: center;
+	text-decoration: underline;
+	font-size: 75%;
+}*/
+
+.elemcb
+{
+  margin: 60px;
+  text-align: center;
+}
+
+.modal-content-mainmenu
+{
+  border-radius: 25px !important;
+  background-color: #595858 !important;
+}
+
+.modal-header-mainmenu
+{
+  height: 150px;
+}
+
+.modal-header-cb
+{
+  background-color: #595858;
+  color: white;
+  border-bottom: 0px !important;
+  margin-left: auto;
+  margin-right: auto;
+  flex-flow: column;
+  align-items: center;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+#logopbid
+{
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.logopbid
+{
+	width: 100px;
+}
+
+.logopbidbig
+{
+	width: 175px;
+}
+
+.modal-title-cb
+{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 1px solid white;
+  height: 38px;
+  line-height: 2.5 !important;
+}
+
+.modal-body-cb
+{
+  justify-content: space-evenly;
+  display: flex;
+  height: auto;
+  flex-flow: column;
+  align-items: center;
+  background-color: #595858;
+  color: white;
+  border-top: 0px !important;
+  border-bottom: 0px !important;
+}
+
+.enlarged
+{
+  width: 100%;
+}
+
+.modal-footer-mainmenu
+{
+	background-color: #595858;
+	color: white;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-evenly;
+	align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.btn-primary
+{
+	background-color: #009CDB !important;
+	border-color: #009CDB !important;
+  color: white !important;
+}
+
+.btn-valider
+{
+  font-weight: bold !important;
+  color: white !important;
+}
+
+.btn-creationboutic
+{
+  font-weight: bold !important;
+  background-color: white !important;
+  color: #e2007a !important;
+  border: 1px solid #e2007a !important;
+}
+
+.btn-annuler
+{
+  font-weight: bold !important;
+  background-color: white !important;
+  color: #e2007a !important;
+  border: 1px solid #e2007a !important;
+}
+
+.btn
+{
+  border-radius: 1.5rem !important;
+}
+
+#illus1
+{
+  height: 60vh;
+}
+
+#bandeaub
+{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100vw !important;
+  height: 4.096vw !important;
+  overflow: auto;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.mdfaddlink
+{
+	color: #1D1D1B !important;
+	width: 100% !important;
+	text-align: center;
+	text-decoration: underline;
+	font-size: 75%;
+  cursor: pointer;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #e2007a !important;
+ }
+
+ ::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: #e2007a !important;
+} 
+
+::ng-deep.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: #e2007a !important;
+}
+
+.mdc-text-field .mdc-text-field__input {
+  caret-color: var(--mat-theme-primary, #e2007a) !important;
+}
+
+mat-form-field.mat-form-field.mat-white {
+  &.mat-focused {
+    .mat-form-field-label {
+        color: #e2007a;
+    }
+    .mat-form-field-ripple {
+        background-color: #e2007a !important;
+    }
+  }
+  .mat-form-field-label,.mat-form-field-label.mat-focused,
+  .mat-form-field.mat-focused.matform-field-should-float {
+      color: #e2007a;
+  }
+  .mat-form-field-underline, .mat-form-field-underline.mat-focused {
+      background-color: #e2007a;
+    }
+  }
+  
+  .mdc-text-field--filled .mdc-line-ripple::after {
+    border-bottom-color: var(--mdc-theme-primary, #e2007a) !important;
+}
+
+#illus2
+{
+  height: 46vh;
+}
+
+.fileelem
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container {
+  display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.loadscreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}

@@ -1,0 +1,68 @@
+@if (loadingState) {
+  <div class="center">
+    <mat-spinner></mat-spinner>
+  </div>
+}
+@if (!loadingState) {
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="shopFormGroup" (submit)="onSubmit()">
+        <mat-form-field subscriptSizing="dynamic">
+          <mat-label>Alias de la boutic :</mat-label>
+          <input matInput class="fieldperso" id="pbaliasid" formControlName="pbalias" type="text" required pattern="[a-z0-9]{3,}" (keyup)="flagAsModified()"/>
+          <mat-error>
+            L'alias de la boutic requis doit au minimun contenir uniquement des minuscules et des chiffres d'au moins 3 caractères de long
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <mat-label>Lien vers la boutic&nbsp;:&nbsp;</mat-label>
+          <a id="linkid" target="_blank" [href]="webhost + shopFormGroup.get('pbalias')?.value">{{ webhost + shopFormGroup.get('pbalias')?.value }}</a>
+        </div>
+        <br>
+          <mat-form-field subscriptSizing="dynamic">
+            <mat-label>Nom de la boutic :</mat-label>
+            <input matInput class="fieldperso" id="pbnomid" formControlName="pbnom" type="text" required (keyup)="flagAsModified()"/>
+            <mat-error>Un nom valide est requis</mat-error>
+          </mat-form-field>
+          <div class="imageitem">
+            <div>
+              <button mat-stroked-button type="button" color="secondary" (click)="fileInput.click()" class="btn btn-fileupload enlarged">
+                <span>Chargement du logo</span>
+                <input #fileInput id="artlogofile" name="artlogofile" type="file" accept="image/png, image/jpeg" (change)="onFileChoose($event); flagAsModified()" style="display:none;" />
+              </button>
+              <div class="frameimg">
+                @if (shopFormGroup.get('pblogo')?.value !== '') {
+                  <img id="artlogo" class="imgart" [src]="srvroot + 'upload/' + shopFormGroup.get('pblogo')?.value" draggable="false" ondragstart="return false;"/>
+                }
+                @if (shopFormGroup.get('pblogo')?.value !== '') {
+                  <img id="logofermer" class="imgclose" src="assets/img/fermer.png" (click)="flagAsModified();closeimg()" draggable="false" ondragstart="return false;"/>
+                }
+                @if (logoLoading) {
+                  <mat-spinner id="spinimg" ></mat-spinner>
+                }
+              </div>
+            </div>
+          </div>
+          <br>
+            <mat-form-field subscriptSizing="dynamic">
+              <mat-label>Courriel :</mat-label>
+              <input matInput class="fieldperso" id="pbemailid" formControlName="pbemail" type="email" required (keyup)="flagAsModified()" />
+              <mat-error>Un courriel valide de la forme user&#64;domain.ext est requis</mat-error>
+            </mat-form-field>
+            <div>
+              <button mat-fab color="warn" aria-label="Annuler les modifications" style="float:left" (click)="cancelUpdates()" [disabled]="!modified">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </div>
+            <div>
+              <button mat-fab color="primary" aria-label="Enregistrer les modifications" style="float:right" type="submit" [disabled]="!modified">
+                <mat-icon>done</mat-icon>
+              </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    }
+    <br>
+      <br>
+        <br>

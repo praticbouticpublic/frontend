@@ -1,0 +1,166 @@
+<div class="center" *ngIf="!loaded">
+  <mat-spinner></mat-spinner>
+</div>
+
+<ng-container>
+  <ng-container id="main">
+    <ng-container id="act">
+      <form *ngIf="formloaded" [formGroup]="form" style="display:block" class="prsmrg" (ngSubmit)="onSubmitAction($event, action)">
+        <ng-container *ngFor="let champ of champs; index as i">
+          <ng-container *ngIf="(action !== 'view') && (champ.nom !== selcol)">
+            <mat-form-field *ngIf="(champ.typ === 'text')">
+              <mat-label id="table{{ numtable }}lbl{{ i }}">{{ champ.desc }}&nbsp;:&nbsp;</mat-label>
+              <input matInput name="table{{numtable}}_{{champ.nom}}" id="table{{numtable}}_inp{{i}}"
+                [formControlName]="i" (keyup)="bakFieldValue($event, i)" />
+            </mat-form-field>
+            <mat-form-field *ngIf="(champ.typ === 'ref')">
+              <mat-label id="table{{ numtable }}lbl{{ i }}">{{ champ.desc }}&nbsp;:&nbsp;</mat-label>
+              <input matInput name="table{{numtable}}_{{champ.nom}}" id="table{{numtable}}_inp{{i}}"
+                required [formControlName]="i" (keyup)="bakFieldValue($event, i)" />
+              <mat-error>Ce champ est requis</mat-error>
+            </mat-form-field>
+            <mat-checkbox class="mbchk" *ngIf="(champ.typ === 'bool')" name="table{{numtable}}_{{champ.nom}}" id="table{{numtable}}_inp{{i}}"
+                [formControlName]="i" labelPosition="before">{{ champ.desc }}&nbsp;:&nbsp;</mat-checkbox>
+            <mat-form-field *ngIf="(champ.typ === 'prix')">
+              <mat-label id="table{{ numtable }}lbl{{ i }}">{{ champ.desc }}&nbsp;:&nbsp;</mat-label>
+              <input matInput name="table{{numtable}}_{{champ.nom}}" id="table{{numtable}}_inp{{i}}"
+                type="number" required step="0.01"
+                min="0" title="Doit être un nombre positif avec 2 chiffres après la virgule"
+                [formControlName]="i" (keyup)="bakFieldValue($event, i)" />
+                <mat-error>Doit être un nombre positif avec 2 chiffres après la virgule</mat-error>
+            </mat-form-field>
+            <mat-form-field *ngIf="(champ.typ === 'percent')">
+              <mat-label id="table{{ numtable }}lbl{{ i }}">{{ champ.desc }}&nbsp;:&nbsp;</mat-label>
+              <input matInput name="table{{numtable}}_{{champ.nom}}" id="table{{numtable}}_inp{{i}}"
+                type="number" required min="0" title="Doit être un nombre positif"
+                [formControlName]="i" (keyup)="bakFieldValue($event, i)" />
+              <mat-label>%</mat-label>
+              <mat-error>Doit être un nombre positif</mat-error>
+            </mat-form-field>
+            <mat-form-field *ngIf="(champ.typ === 'pass')">
+              <mat-label id="table{{ numtable }}lbl{{ i }}">{{ champ.desc }}&nbsp;:&nbsp;</mat-label>
+              <input matInput id="table{{numtable}}_inp{{i}}" name="table{{numtable}}_{{champ.nom}}" type="password" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%&*?]).{8,}"
+                title="Le mot de passe doit contenir au moins un chiffre, une majuscule, une minuscule, un signe parmi !@#$%&*? et être de au moins 8 caractères"
+                required autocomplete="new-password" [formControlName]="i"  />
+              <mat-error>Le mot de passe doit contenir au moins un chiffre, une majuscule, une minuscule, un signe parmi !&#64;#$%&*? et être de au moins 8 caractères</mat-error>
+            </mat-form-field>
+            <mat-form-field *ngIf="(champ.typ === 'email')">
+              <mat-label id="table{{ numtable }}lbl{{ i }}">{{ champ.desc }}&nbsp;:&nbsp;</mat-label>
+              <input matInput id="table{{numtable}}_inp{{i}}" name="table{{numtable}}_{{champ.nom}}" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                title="Le courriel doit valide" required [formControlName]="i" (keyup)="bakFieldValue($event, i)" />
+              <mat-error>Un email valide est requis. Il doit être de la forme user&#64;domian.ext</mat-error>
+            </mat-form-field>
+            <mat-form-field *ngIf="(champ.typ === 'codepostal')">
+              <mat-label id="table{{ numtable }}lbl{{ i }}">{{ champ.desc }}&nbsp;:&nbsp;</mat-label>
+              <input matInput id="table{{numtable}}_inp{{i}}" name="table{{numtable}}_{{champ.nom}}" type="text" pattern="[0-9]{5}" minlength="5" maxlength="5"
+                    title="Le code postal doit être valide" required [formControlName]="i" (keyup)="bakFieldValue($event, i)" />
+              <mat-error>Un code postal français est requis. Il doit être composé de 5 chiffres</mat-error>
+            </mat-form-field>
+            <mat-form-field *ngIf="(champ.typ === 'codepromo')">
+              <mat-label id="table{{ numtable }}lbl{{ i }}">{{ champ.desc }}&nbsp;:&nbsp;</mat-label>
+              <input matInput id="table{{numtable}}_inp{{i}}" name="table{{numtable}}_{{champ.nom}}" type="text" pattern="[0-9A-Z]{8}" minlength="8" maxlength="8"
+                    title="Le code promotionnel doit être valide" required [formControlName]="i" (keyup)="bakFieldValue($event, i)" />
+              <mat-error>Le code promotionnel doit contenir 8 chiffres/majuscules</mat-error>
+            </mat-form-field>
+            <mat-form-field *ngIf="(champ.typ === 'couleur')">
+              <mat-label id="table{{ numtable }}lbl{{ i }}">{{ champ.desc }}&nbsp;:&nbsp;</mat-label>
+              <input matInput id="table{{numtable}}_inp{{i}}" name="table{{numtable}}_{{champ.nom}}" type="text" pattern="^#([A-Fa-f0-9]{6})$" minlength="7" maxlength="7"
+                title="La couleur héxadécimal doit être valide" [formControlName]="i" required (keyup)="bakFieldValue($event, i)" />
+            </mat-form-field>
+            <mat-form-field *ngIf="(liste.length >= i) && (liste[i] && liste[i].length) && (champ.typ === 'fk')">
+              <mat-label>{{ nomliens[i] }}&nbsp;:&nbsp;</mat-label>
+              <mat-select id="table{{numtable}}_lien{{i}}" [formControlName]="i" (selectionChange)="bakSelectionValue($event, i)" required>
+                <mat-option *ngFor="let list of liste[i]; index as j" id="table{{numtable}}_lien{{i}}_opt{{j}}" value="{{ list.id }}">{{ list.valeur }}</mat-option>
+              </mat-select>
+              <mat-error>Cette sélection est requise</mat-error>
+            </mat-form-field>
+            <mat-form-field *ngIf="(champ.nom === 'statid' && liste.length >= i && liste[i] && liste[i].length > 0 && valeurs.length >= i) && (action === 'view') && (nomliens.length === champs.length)">
+              <mat-label id="table{{ numtable }}lbl{{ i }}">{{ nomliens[i] }}&nbsp;:&nbsp;</mat-label>
+              <mat-select id="dtable{{ numtable }}lien{{ i }}" (selectionChange)="onStatutChange($event, i)" [value]="valeurs[i].id" [formControlName]="i"
+                  [style.background-color]="valeurs[i].couleur" [style.color]="(luminosite(valeurs[i].couleur === null ? '#FFFFFF' : valeurs[i].couleur) > 127) ? 'black' : 'white'">
+                  <mat-option id="dtable{{ numtable }}lien{{ i }}opt{{j}}" *ngFor="let list of liste[i]; index as j"
+                    [style.background-color]="list.couleur" [style.color]="(luminosite(list.couleur === null ? '#FFFFFF' : list.couleur) > 127) ? 'black' : 'white'"
+                    [value]="list.id" [ngClass]="'optbackcolor' + j">{{ list.valeur }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+          </ng-container>
+          <div *ngIf="(action === 'view') && (champ.nom !== selcol)">
+            <ng-container *ngIf="(champ.typ !== 'fk') && (champ.nom !== 'statid') && (valeurs[i] !== undefined)">
+              <mat-label id="table{{ numtable }}lbl{{ i }}">{{ champ.desc }}&nbsp;:&nbsp;</mat-label>
+              <mat-label id="table{{ numtable }}_val{{ i }}">{{ valeurs[i] }}</mat-label>
+            </ng-container>
+            <ng-container *ngIf="(champ.typ === 'fk') && (champ.nom !== 'statid') && (valeurs !== null) && (valeurs.length >= i) && (valeurs[i] !== undefined)">
+              <mat-label id="table{{ numtable }}lbl{{ i }}">{{ champ.desc }}&nbsp;:&nbsp;</mat-label>
+              <mat-label id="table{{ numtable }}_val{{ i }}">{{ valeurs[i].valeur }}</mat-label>
+            </ng-container>
+            <mat-form-field *ngIf="(champ.typ === 'fk') && (champ.nom === 'statid') && liste && (liste.length >= i) && (liste[i]) && (liste[i].length > 0) && (valeurs[i] !== undefined) && (valeurs.length > i)">
+              <mat-label id="table{{ numtable }}lbl{{ i }}">{{ nomliens[i] }}&nbsp;:&nbsp;</mat-label>
+              <mat-select id="dtable{{ numtable }}lien{{ i }}" (selectionChange)="onStatutChange($event, i)" [value]="valeurs[i].id"
+              [style.background-color]="valeurs[i].couleur" [class]="(valeurs[i].couleur === null) ? 'txtblack' : ((luminosite(valeurs[i].couleur) > 127) ? 'txtblack' : 'txtwhite')">
+                <mat-option id="dtable{{ numtable }}lien{{ i }}opt{{j}}" *ngFor="let list of liste[i]; index as j"
+                  [style.background-color]="list.couleur" [style.color]="(luminosite(list.couleur === null ? '#FFFFFF' : list.couleur) > 127) ? 'black' : 'white'"
+                  [value]="list.id" [ngClass]="'optbackcolor' + j">{{ list.valeur }}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="(table === 'article')" class="">
+          <div class="formfield">
+            <button mat-flat-button type="button" color="secondary" (click)="fileInput.click()" class="btn btn-fileupload enlarged">
+              <span>Chargement des images</span>
+              <input #fileInput name="file[]" type="file" accept="image/png, image/jpeg" (change)="onAddImgToLst($event)" multiple style="display:none;" />
+            </button>
+            <div style="position:relative;" class="loadcenter">
+              <div class="frameimg imgart">
+                <div *ngIf="!logoloaded">
+                  <mat-spinner id="spinimgid" ></mat-spinner>
+                </div>
+                <div *ngIf="logoloaded">
+                  <ngb-carousel id="carouselimgid" [interval]="0" [showNavigationIndicators]="false" style="position:relative;display: grid;" style="z-index: 1;">
+                    <ng-template *ngFor="let img of listimgvis; index as i" ngbSlide>
+                      <div class="frameimg imgart" style="z-index: 1;">
+                        <ng-container class="picsum-img-wrapper" [class]="(i === 0) ? 'active' : ''">
+                          <img src="{{ srvroot }}upload/{{ img.filename }}" class="imgart" alt="" draggable="false" ondragstart="return false;"/>
+                        </ng-container>
+                      </div>
+                      <div class="imgclose" *ngIf="listimgvis.length">
+                        <img  src="assets/img/fermer.png" alt=""
+                          (click)="onRemoveImgFromLst(i)" draggable="false" ondragstart="return false;"/>
+                      </div>
+                      <div id="favoriid" *ngIf="listimgvis.length">
+                        <img [src]="listimgvis[i].favori ? 'assets/svg/favori_selected.svg' : 'assets/svg/favori_unselected.svg'"
+                          alt="" [class]="listimgvis[i].favori ? 'imgfavorion' : 'imgfavorioff'"
+                          (click)="onChangeFavImg(i)" draggable="false" ondragstart="return false;"/>
+                      </div>
+                    </ng-template>
+                  </ngb-carousel>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <br>
+        <div *ngIf="(action === 'view')">
+          <button mat-fab type="button" color="warn" aria-label="Revenir à l'écran précédent" style="float:left" (click)="goBack()">
+            <mat-icon>subdirectory_arrow_left</mat-icon>
+          </button>
+        </div>
+        <div class="formfield"*ngIf="(action !== 'view')">
+          <button mat-fab type="button" color="warn" aria-label="Annuler les modifications" style="float:left" (click)="goBack()">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="(action !== 'view')">
+          <button mat-fab type="submit" color="primary" aria-label="Enregistrer les modifications" style="float:right">
+            <mat-icon>done</mat-icon>
+          </button>
+        </div>
+      </form>
+    </ng-container>
+  </ng-container>
+</ng-container>
+<br>
+<br>
+<br>
+

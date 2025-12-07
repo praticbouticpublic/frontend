@@ -1,0 +1,82 @@
+@if (loadingState) {
+  <div class="center">
+    <mat-spinner></mat-spinner>
+  </div>
+}
+@if (!loadingState) {
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="clientPropFormGroup" (submit)="onSubmit()">
+        <mat-form-field subscriptSizing="dynamic">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput formControlName="clpass" id="clpassid" [type]="hide ? 'password' : 'text'" (keyup)="flagAsModified()"/>
+          <mat-icon (click)="hide = !hide" matSuffix>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error>Le mot de passe doit contenir au moins un chiffre, une majuscule, une minuscule, un signe parmi !&#64;#$%&*? et être de au moins 8 caractères</mat-error>
+        </mat-form-field>
+        <mat-form-field subscriptSizing="dynamic">
+          <mat-label>Mot de passe (confirmation): </mat-label>
+          <input matInput formControlName="clpassconf" id="clpassconfid" [type]="hideconf ? 'password' : 'text'" (keyup)="flagAsModified()"/>
+          <mat-icon (click)="hideconf = !hideconf" matSuffix>{{hideconf ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error>Le mot de passe doit contenir au moins un chiffre, une majuscule, une minuscule, un signe parmi !&#64;#$%&*? et être de au moins 8 caractères</mat-error>
+        </mat-form-field>
+        <mat-radio-group aria-label="Civilité : " formControlName="clqualite" (ngModelChange)="flagAsModified()">
+          <mat-radio-button type="radio" id="homme" name="qualite" value="Monsieur" required>&nbsp;Monsieur&nbsp;</mat-radio-button>
+          <mat-radio-button type="radio" id="femme" name="qualite" value="Madame">&nbsp;Madame&nbsp;</mat-radio-button>
+          @if (isSubmitted && clientPropFormGroup.get('clqualite')?.invalid) {
+            <mat-error>Une civilité est requise</mat-error>
+          }
+        </mat-radio-group>
+        <br>
+          <br>
+            <mat-form-field subscriptSizing="dynamic">
+              <mat-label>Nom</mat-label>
+              <input matInput formControlName="clnom" id="nom" name="nom" type="text" value="" maxlength="60" required (keyup)="flagAsModified()"><br>
+              <mat-error>Un nom est requis (60 caractères max.)</mat-error>
+            </mat-form-field>
+            <mat-form-field subscriptSizing="dynamic">
+              <mat-label>Prenom</mat-label>
+              <input matInput formControlName="clprenom" id="prenom" name="prenom" type="text" value="" maxlength="60" required (keyup)="flagAsModified()"><br>
+              <mat-error>Un prénom est requis (60 caractères max.)</mat-error>
+            </mat-form-field>
+            <mat-form-field subscriptSizing="dynamic">
+              <mat-label>Adresse (ligne 1)</mat-label>
+              <input matInput formControlName="cladr1" id="adr1" name="adr1" type="text" value="" maxlength="150" required (keyup)="flagAsModified()"><br>
+              <mat-error>La ligne d'adresse 1 est requise (150 caractères max.)</mat-error>
+            </mat-form-field>
+            <mat-form-field subscriptSizing="dynamic">
+              <mat-label>Adresse (ligne 2)</mat-label>
+              <input matInput formControlName="cladr2" id="adr2" name="adr2" type="text" value="" maxlength="150" (keyup)="flagAsModified()"><br>
+              <mat-error>(150 caractères max.)</mat-error>
+            </mat-form-field>
+            <mat-form-field subscriptSizing="dynamic">
+              <mat-label>Code Postal</mat-label>
+              <input matInput formControlName="clcp"  id="cp" name="cp" type="text" value="" maxlength="5" pattern="[0-9]{5}" required (keyup)="flagAsModified()"><br>
+              <mat-error>Un code postal de 5 chiffres est requis</mat-error>
+            </mat-form-field>
+            <mat-form-field subscriptSizing="dynamic">
+              <mat-label>Ville</mat-label>
+              <input matInput formControlName="clville" id="ville" name="ville" type="text" value="" maxlength="50" required (keyup)="flagAsModified()"><br>
+              <mat-error>Une ville est requise (50 caractères max.)</mat-error>
+            </mat-form-field>
+            <mat-form-field subscriptSizing="dynamic">
+              <mat-label>Téléphone</mat-label>
+              <input matInput formControlName="cltel" id="tel" name="tel" type="text" value="" autocomplete="tel" maxlength="60" pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[0-9](?:[\.\-\s]?\d\d){4}$" (keyup)="flagAsModified()"><br>
+              <mat-error>Un téléphone français est requis</mat-error>
+            </mat-form-field>
+            <div>
+              <button mat-fab color="warn" aria-label="Annuler les modifications" style="float:left" (click)="cancelUpdates()" [disabled]="!modified" (keyup)="flagAsModified()">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </div>
+            <div>
+              <button mat-fab color="primary" aria-label="Enregistrer les modifications" style="float:right" type="submit" [disabled]="!modified" (keyup)="flagAsModified()">
+                <mat-icon>done</mat-icon>
+              </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    }
+    <br>
+      <br>
+        <br>

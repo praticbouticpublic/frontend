@@ -1,0 +1,13 @@
+.main-content {
+    box-sizing: border-box;
+    padding: 20px;
+    margin-left: 33%;
+    margin-right: 33%;
+  }
+
+  .page-content {
+    width: calc(100% - 16rem);
+    margin-left: 16rem;
+    transition: all 0.4s;
+}
+
